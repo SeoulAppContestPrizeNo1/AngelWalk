@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical">
+
+<Button
+    android:id="@+id/btnCard"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragment.MapFragment">
+    android:layout_height="100dp"
+    android:text="복지카드"/>
+
+<LinearLayout
+    android:id="@+id/wrapOne"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    app:layout_constraintTop_toBottomOf="@+id/btnCard">
+
+    <Button
+        android:id="@+id/btnCharging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="휠체어 충전소"/>
+
+    <Button
+        android:id="@+id/btnCite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="관광지"/>
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/wraoTwo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/wrapOne"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    app:layout_constraintTop_toBottomOf="@+id/wrapOne">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="교통 편의시설"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="커뮤니티"/>
+
+</LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
