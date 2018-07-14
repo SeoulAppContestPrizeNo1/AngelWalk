@@ -16,10 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Fragment.MapFragment" />
-        <activity android:name=".Activity.HomeActivity" />
-        <activity android:name=".Fragment.SettingFragment" />
-        <activity android:name=".Fragment.SightsFragment"></activity>
+        <activity android:name=".Activity.SightsActivity"/>
+        <activity android:name=".Activity.WheelchairChargingActivity"/>
+
+
     </application>
 
 </manifest>
