@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".Fragment.MapFragment" />
         <activity android:name=".Activity.HomeActivity" />
-        <activity android:name=".Fragment.SettingFragment"></activity>
+        <activity android:name=".Fragment.SettingFragment" />
+        <activity android:name=".Fragment.TourismFragment" />
+        <activity android:name=".Activity.SightsActivity" />
+        <activity android:name=".Activity.WheelchairChargingActivity"></activity>
     </application>
 
 </manifest>
