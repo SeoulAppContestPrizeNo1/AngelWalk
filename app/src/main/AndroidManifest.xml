@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.walk.angel.angelwalk">
 
-    <uses-permission android:name="android.permission.INTERNET">
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
-    <meta-data android:name="com.kakao.sdk.AppKey" android:value=""/>
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="edf139f45cfd471ad648c79df3433d57" />
 
     <application
         android:allowBackup="true"
@@ -23,9 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SightsActivity"/>
-        <activity android:name=".Activity.WheelchairChargingActivity"/>
-
+        <activity
+            android:name=".Activity.SightsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Activity.WheelchairChargingActivity" />
+        <activity android:name=".Activity.SightInfoActivity"></activity>
 
     </application>
 
