@@ -16,11 +16,12 @@ import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Activity.MainActivity;
 import com.walk.angel.angelwalk.Activity.SightsActivity;
+import com.walk.angel.angelwalk.Activity.WheelchairChargingActivity;
 import com.walk.angel.angelwalk.R;
 
 public class HomeFragment extends Fragment {
 
-    Button btnTourism;
+    Button btnTourism, btnCharging;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +30,9 @@ public class HomeFragment extends Fragment {
 
         btnTourism = (Button) HomeFragment.findViewById(R.id.btnTourism);
         btnTourism.setOnClickListener(btnClickListener);
+
+        btnCharging = (Button) HomeFragment.findViewById(R.id.btnCharging);
+        btnCharging.setOnClickListener(btnClickListener);
 
         return HomeFragment;
     }
@@ -39,11 +43,13 @@ public class HomeFragment extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.btnTourism:
-                    Intent intent = new Intent(getView().getContext(), SightsActivity.class);
-                    startActivity(intent);
+                    Intent intentTourism = new Intent(getView().getContext(), SightsActivity.class);
+                    startActivity(intentTourism);
                     break;
 
                 case R.id.btnCharging:
+                    Intent intentCharging = new Intent(getView().getContext(), WheelchairChargingActivity.class);
+                    startActivity(intentCharging);
                     break;
             }
         }
