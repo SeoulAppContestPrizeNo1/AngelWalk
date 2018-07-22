@@ -59,32 +59,27 @@
 
     </LinearLayout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/wrapOne">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/wrapOne"
+        >
 
-        <LinearLayout
+        <Button
+            android:id="@+id/add_more_contacts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:text="Add more contacts"
+            />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="300dip"
-                android:background="#ff0000"
-                android:gravity="center"
-                android:text="#ff0000" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="300dip"
-                android:background="#00ff00"
-                android:gravity="center"
-                android:text="#00ff00" />
-
-        </LinearLayout>
-
-    </ScrollView>
-
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
