@@ -81,4 +81,9 @@ public class SightsAdapter extends ListAdapter<SightsData, SightsAdapter.ViewHol
         }
     }
 
+    public void updateList(List<SightsData> list){
+        mSights.clear();
+        mSights.addAll(list);
+        this.notifyDataSetChanged();
+    }
 }

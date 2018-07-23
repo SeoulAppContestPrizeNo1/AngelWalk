@@ -38,6 +38,7 @@ public class SightsData implements Serializable {
             sights.add(new SightsData(i,"관광지 " + i, "주소 " + i));
         }
 
+        sights.add(new SightsData(numContacts++,"아름", "테스트"));
         return sights;
     }
 }

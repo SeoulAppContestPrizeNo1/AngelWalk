@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Adapter.SightsAdapter;
@@ -22,12 +25,39 @@ public class SightsActivity extends AppCompatActivity {
     SightsAdapter adapter;
     RecyclerView recyclerView;
     List<SightsData> listOfSightData = new ArrayList<>();
+    EditText editTxtSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sights);
 
+        editTxtSearch = (EditText) findViewById(R.id.editTxtSearch);
         setupViews();
+
+        editTxtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+                filter(s.toString());
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
     }
 
     void setupViews() {
@@ -75,4 +105,18 @@ public class SightsActivity extends AppCompatActivity {
         }
     };
 
+
+    void filter(String text){
+        List<SightsData> sightlist = new ArrayList();
+        for(SightsData data: listOfSightData){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(data.getName().equals(text)){
+                sightlist.add(data);
+                Toast.makeText(SightsActivity.this, data.getName(), Toast.LENGTH_SHORT).show();
+
+            }
+        }
+        adapter.updateList(sightlist);
+    }
 }

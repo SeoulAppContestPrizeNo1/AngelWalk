@@ -9,10 +9,11 @@
 
 
     <EditText
-        android:id="@+id/editSearch"
+        android:id="@+id/editTxtSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="검색어를 입력하세요."/>
+        android:hint="검색어를 입력하세요."
+        android:singleLine="true"/>
 
     <LinearLayout
         android:id="@+id/wrapOne"
