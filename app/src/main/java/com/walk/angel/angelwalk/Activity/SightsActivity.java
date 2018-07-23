@@ -1,5 +1,6 @@
 package com.walk.angel.angelwalk.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,7 +47,12 @@ public class SightsActivity extends AppCompatActivity {
 
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                SightsData data = new SightsData(position, listOfSightData.get(position).getName(), listOfSightData.get(position).getAddress());
                 Toast.makeText(SightsActivity.this, "클릭한 아이템의 이름은 " + listOfSightData.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SightsActivity.this, SightInfoActivity.class);
+                intent.putExtra("sightsInfo", data);
+                startActivity(intent);
             }
         });
 

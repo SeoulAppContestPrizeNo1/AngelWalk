@@ -26,16 +26,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/txtSightInfoName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="경복궁" />
+                android:text="" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/txtSightInfoAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="번호" />
+                android:text="" />
         </LinearLayout>
 
     </ScrollView>

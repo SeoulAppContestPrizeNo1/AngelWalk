@@ -1,17 +1,16 @@
 package com.walk.angel.angelwalk.Data;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SightsData implements Serializable {
+public class WheelchairChargingData {
 
     private int mId;
 
     private String mName;
     private String mAddress;
 
-    public SightsData(int id, String name, String address) {
+    public WheelchairChargingData(int id, String name, String address) {
         mId = id;
         mName = name;
         mAddress = address;
