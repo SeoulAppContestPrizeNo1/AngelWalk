@@ -61,12 +61,19 @@ public class SightsActivity extends AppCompatActivity {
     }
 
     void setupViews() {
+<<<<<<< Updated upstream
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+=======
+        //layout xml에 작성해둔 RecyclerView
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+>>>>>>> Stashed changes
         // Setup RecyclerView, associated adapter, and layout manager.
         adapter = new SightsAdapter();
 
+        //RecyclerView에 Adapter세팅
         recyclerView.setAdapter(adapter);
+        //
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listOfSightData = SightsData.createSightsList(20);
