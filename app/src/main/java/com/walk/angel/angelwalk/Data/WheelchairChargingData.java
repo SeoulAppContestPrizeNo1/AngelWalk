@@ -1,27 +1,22 @@
 package com.walk.angel.angelwalk.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WheelchairChargingData {
+public class WheelchairChargingData implements Serializable {
 
     private int mId;
 
-    private String mName;
     private String mAddress;
 
-    public WheelchairChargingData(int id, String name, String address) {
+    public WheelchairChargingData(int id, String address) {
         mId = id;
-        mName = name;
         mAddress = address;
     }
 
     public int getId() {
         return mId;
-    }
-
-    public String getName() {
-        return mName;
     }
 
     public String getAddress() {
@@ -30,13 +25,13 @@ public class WheelchairChargingData {
 
     private static int lastContactId = 0;
 
-    public static List<SightsData> createSightsList(int numContacts) {
-        List<SightsData> sights = new ArrayList<>();
-//
-//        for (int i = 1; i <= numContacts; i++) {
-//            sights.add(new SightsData(i,"관광지 " + i, "주소 " + i));
-//        }
+    public static List<WheelchairChargingData> createWheelchairChargingList(int numCharging) {
+        List<WheelchairChargingData> chargings = new ArrayList<>();
 
-        return sights;
+        for (int i = 1; i <= numCharging; i++) {
+            chargings.add(new WheelchairChargingData(i,"주소 " + i));
+        }
+
+        return chargings;
     }
 }
