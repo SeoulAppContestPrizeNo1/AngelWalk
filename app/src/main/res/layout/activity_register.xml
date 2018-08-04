@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,59 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".Activity.RegisterActivity">
 
-<EditText
-    android:id="@+id/editId"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
-    android:ems="10"
-    android:hint="아이디"
-    android:inputType="textPersonName"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.527"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.121" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-<EditText
-    android:id="@+id/text_password"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="비밀번호"
-    android:inputType="textPassword"
-    tools:layout_editor_absoluteX="84dp"
-    tools:layout_editor_absoluteY="127dp" />
+        <EditText
+            android:id="@+id/editId"
+            android:hint="아이디"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<EditText
-    android:id="@+id/text_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="이름"
-    android:inputType="textPersonName"
-    tools:layout_editor_absoluteX="84dp"
-    tools:layout_editor_absoluteY="199dp" />
+        <EditText
+        android:id="@+id/editPassword"
+        android:hint="비밀번호"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/editId"/>
 
-<EditText
-    android:id="@+id/text_age"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:hint="나이"
-    android:inputType="textPersonName"
-    tools:layout_editor_absoluteX="84dp"
-    tools:layout_editor_absoluteY="278dp" />
+        <EditText
+            android:id="@+id/editUsername"
+            android:hint="닉네임"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
 
-<Button
-    android:id="@+id/btn_register"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="회원가입"
-    tools:layout_editor_absoluteX="160dp"
-    tools:layout_editor_absoluteY="348dp" />
+        <Button
+            android:id="@+id/btnRegister"
+            android:text="회원가입"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btnUsername"/>
+
+
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

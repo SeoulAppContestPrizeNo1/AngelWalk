@@ -11,24 +11,32 @@ import com.walk.angel.angelwalk.R;
 public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        btnLogin = (Button) findViewById(R.id.btn_login);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(btnClickListener);
+
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(btnClickListener);
     }
 
     private Button.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.btn_login:
+                case R.id.btnLogin:
                     Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intentMain);
+                    break;
+
+                case R.id.btnRegister:
+                    Intent intentRegister = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(intentRegister);
                     break;
 
             }
