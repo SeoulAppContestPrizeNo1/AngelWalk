@@ -7,58 +7,53 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 android:orientation="vertical"
 android:id="@+id/fragmentHome">
 
-<Button
-    android:id="@+id/btnCard"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:text="복지카드"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="4">
 
-<LinearLayout
-    android:id="@+id/wrapOne"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="2"
-    app:layout_constraintTop_toBottomOf="@+id/btnCard">
+        <Button
+            android:id="@+id/btnCard"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="복지카드"
+            android:layout_weight="1"/>
 
-    <Button
-        android:id="@+id/btnCharging"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="휠체어 충전소"/>
+        <LinearLayout
+            android:id="@+id/wrapOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="3"
+            android:layout_weight="3"
+            app:layout_constraintTop_toBottomOf="@+id/btnCard">
 
-    <Button
-        android:id="@+id/btnTourism"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="관광지"/>
-</LinearLayout>
+            <Button
+                android:id="@+id/btnCharging"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="휠체어 충전소"/>
 
-<LinearLayout
-    android:id="@+id/wraoTwo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/wrapOne"
-    android:orientation="horizontal"
-    android:weightSum="2"
-    app:layout_constraintTop_toBottomOf="@+id/wrapOne">
+            <Button
+                android:id="@+id/btnTourism"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="관광지"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="교통 편의시설"/>
 
-    <Button
-        android:id="@+id/btnPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="커뮤니티"/>
+            <Button
+                android:id="@+id/btnPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="커뮤니티"/>
 
-</LinearLayout>
+        </LinearLayout>
 
+        
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
