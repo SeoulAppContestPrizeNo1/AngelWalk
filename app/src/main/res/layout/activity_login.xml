@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activity.LoginActivity">
 
     <LinearLayout
@@ -27,12 +27,20 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/editId"/>
 
+        <CheckBox
+            android:id="@+id/checkLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자동로그인"
+            app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
+
+
         <Button
             android:id="@+id/btnLogin"
             android:text="로그인"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
+            app:layout_constraintTop_toBottomOf="@+id/checkLogin"/>
 
         <Button
             android:id="@+id/btnRegister"
@@ -44,7 +52,7 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
 
 
 

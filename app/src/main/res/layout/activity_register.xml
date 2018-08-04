@@ -33,12 +33,35 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/editPassword"/>
 
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/editUsername">
+
+            <RadioButton
+                android:id="@+id/radioType1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="장애인" />
+
+            <RadioButton
+                android:id="@+id/radioType2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="보호자" />
+
+        </RadioGroup>
+
         <Button
             android:id="@+id/btnRegister"
             android:text="회원가입"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/btnUsername"/>
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"/>
 
 
     </LinearLayout>
