@@ -27,7 +27,7 @@ public class SightsActivity extends AppCompatActivity {
     List<SightsData> listOfSightData = new ArrayList<>();
     List<SightsData> listOfCurrentSightData = new ArrayList<>();
     EditText editTxtSearch;
-    Button btnCattle, btnPark;
+    Button btnAll, btnCattle, btnPark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,12 @@ public class SightsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sights);
 
         editTxtSearch = (EditText) findViewById(R.id.editTxtSearch);
+        btnAll = (Button) findViewById(R.id.btnAll);
         btnCattle = (Button) findViewById(R.id.btnCattle);
         btnPark = (Button) findViewById(R.id.btnPark);
 
+
+        btnAll.setOnClickListener(btnClickListener);
         btnCattle.setOnClickListener(btnClickListener);
         btnPark.setOnClickListener(btnClickListener);
 
@@ -71,7 +74,7 @@ public class SightsActivity extends AppCompatActivity {
     }
 
     void setupViews() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_sight);
 
         // Setup RecyclerView, associated adapter, and layout manager.
         adapter = new SightsAdapter();
