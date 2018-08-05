@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 
 public interface AngelWalkServerAPI {
 
-    @GET("url/{parameter}")
+   /* @GET("url/{parameter}")
     Call<ResponseBody> getInformationFromServerByGetMethod(@Path("parameter") String parameter);
 
     @GET("url/wantToRequestUsingURLQuery")
@@ -28,6 +28,6 @@ public interface AngelWalkServerAPI {
 
     @Multipart
     @POST("url/wantPostMultipartURL")
-    Call<ResponseBody> postMultipartParameterToWantPostURL(@Part("parameter")RequestBody parameterBody);
+    Call<ResponseBody> postMultipartParameterToWantPostURL(@Part("parameter")RequestBody parameterBody);*/
 
 }

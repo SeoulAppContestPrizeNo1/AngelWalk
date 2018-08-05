@@ -75,7 +75,7 @@ public class SightsActivity extends AppCompatActivity {
 
         // Setup RecyclerView, associated adapter, and layout manager.
         adapter = new SightsAdapter();
-
+        //dd
         //RecyclerView에 Adapter세팅
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
