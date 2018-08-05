@@ -27,5 +27,6 @@ public class SightInfoActivity extends AppCompatActivity {
         // Data TextView에 적용
         txtSightInfoName.setText(data.getName());
         txtSightInfoAddress.setText(data.getAddress());
+
     }
 }

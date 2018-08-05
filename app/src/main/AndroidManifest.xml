@@ -20,6 +20,7 @@
         <activity android:name=".Activity.SightsActivity" />
         <activity android:name=".Activity.SightInfoActivity" />
         <activity android:name=".Activity.WheelchairChargingActivity" />
+        <activity android:name=".Activity.WheelchairChargingInfoActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -66,7 +66,7 @@ public class WheelchairChargingActivity extends AppCompatActivity {
                 //SightsData data = new SightsData(position, listOfSightData.get(position).getName(), listOfSightData.get(position).getAddress(), listOfSightData.get(position).getCategory());
                 WheelchairChargingData data = listOfCurrentWheelchairChargingData.get(position);
                 Toast.makeText(WheelchairChargingActivity.this, "클릭한 아이템의 이름은 " + listOfCurrentWheelchairChargingData.get(position).getAddress(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(WheelchairChargingActivity.this, SightInfoActivity.class);
+                Intent intent = new Intent(WheelchairChargingActivity.this, WheelchairChargingInfoActivity.class);
                 intent.putExtra("WheelchairChargingAddress", data);
                 startActivity(intent);
             }
