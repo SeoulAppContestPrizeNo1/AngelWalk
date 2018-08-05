@@ -32,10 +32,10 @@ public class WheelchairChargingData {
 
     public static List<SightsData> createSightsList(int numContacts) {
         List<SightsData> sights = new ArrayList<>();
-
-        for (int i = 1; i <= numContacts; i++) {
-            sights.add(new SightsData(i,"관광지 " + i, "주소 " + i));
-        }
+//
+//        for (int i = 1; i <= numContacts; i++) {
+//            sights.add(new SightsData(i,"관광지 " + i, "주소 " + i));
+//        }
 
         return sights;
     }

@@ -29,7 +29,7 @@ public class SightsAdapter extends ListAdapter<SightsData, SightsAdapter.ViewHol
 
                 @Override
                 public boolean areContentsTheSame(SightsData oldItem, SightsData newItem) {
-                    return (oldItem.getName() == newItem.getName() && oldItem.getAddress() == newItem.getAddress());
+                    return (oldItem.getName().equals(newItem.getName()) && oldItem.getAddress().equals(newItem.getAddress()));
                 }
             };
 

@@ -25,7 +25,9 @@ public class SightsActivity extends AppCompatActivity {
     SightsAdapter adapter;
     RecyclerView recyclerView;
     List<SightsData> listOfSightData = new ArrayList<>();
+    List<SightsData> listOfCurrentSightData = new ArrayList<>();
     EditText editTxtSearch;
+    Button btnCattle, btnPark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,14 @@ public class SightsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sights);
 
         editTxtSearch = (EditText) findViewById(R.id.editTxtSearch);
+        btnCattle = (Button) findViewById(R.id.btnCattle);
+        btnPark = (Button) findViewById(R.id.btnPark);
+
+        btnCattle.setOnClickListener(btnClickListener);
+        btnPark.setOnClickListener(btnClickListener);
+
+        listOfSightData = SightsData.createSightsList(20);
+        listOfCurrentSightData = listOfSightData;
         setupViews();
 
         editTxtSearch.addTextChangedListener(new TextWatcher() {
@@ -40,7 +50,7 @@ public class SightsActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 // TODO Auto-generated method stub
-                filter(s.toString());
+                filter(s.toString(),"search");
 
             }
 
@@ -54,29 +64,21 @@ public class SightsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 // filter your list from your input
-                filter(s.toString());
+                filter(s.toString(), "search");
                 //you can use runnable postDelayed like 500 ms to delay search text
             }
         });
     }
 
     void setupViews() {
-<<<<<<< Updated upstream
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-=======
-        //layout xml에 작성해둔 RecyclerView
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
->>>>>>> Stashed changes
         // Setup RecyclerView, associated adapter, and layout manager.
         adapter = new SightsAdapter();
 
         //RecyclerView에 Adapter세팅
         recyclerView.setAdapter(adapter);
-        //
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        listOfSightData = SightsData.createSightsList(20);
 
         adapter.addMoreSights(SightsData.createSightsList(20));
 
@@ -85,8 +87,9 @@ public class SightsActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-                SightsData data = new SightsData(position, listOfSightData.get(position).getName(), listOfSightData.get(position).getAddress());
-                Toast.makeText(SightsActivity.this, "클릭한 아이템의 이름은 " + listOfSightData.get(position).getName(), Toast.LENGTH_SHORT).show();
+                //SightsData data = new SightsData(position, listOfSightData.get(position).getName(), listOfSightData.get(position).getAddress(), listOfSightData.get(position).getCategory());
+                SightsData data = listOfCurrentSightData.get(position);
+                Toast.makeText(SightsActivity.this, "클릭한 아이템의 이름은 " + listOfCurrentSightData.get(position).getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SightsActivity.this, SightInfoActivity.class);
                 intent.putExtra("sightsInfo", data);
                 startActivity(intent);
@@ -107,23 +110,43 @@ public class SightsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
+                case R.id.btnAll:
+                    adapter.updateList(listOfSightData);
+                    break;
+                case R.id.btnCattle:
+                    filter("고궁","category");
+                    break;
+                case R.id.btnPark:
+                    filter("공원","category");
+                    break;
+                case R.id.btnSite:
+                    filter("유적지","category");
+                    break;
+                case R.id.btnMuseum:
+                    filter("박물관","category");
+                    break;
+                default:
+
 
             }
         }
     };
 
 
-    void filter(String text){
+    void filter(String text, String type){
         List<SightsData> sightlist = new ArrayList();
         for(SightsData data: listOfSightData){
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
-            if(data.getName().equals(text)){
+            if(type.equals("search") && data.getName().equals(text)){
                 sightlist.add(data);
-                Toast.makeText(SightsActivity.this, data.getName(), Toast.LENGTH_SHORT).show();
+            }
 
+            if(type.equals("category") && data.getCategory().equals(text)){
+                sightlist.add(data);
             }
         }
+        listOfCurrentSightData = sightlist;
         adapter.updateList(sightlist);
     }
 }

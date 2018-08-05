@@ -10,11 +10,13 @@ public class SightsData implements Serializable {
 
     private String mName;
     private String mAddress;
+    private String mCategory;
 
-    public SightsData(int id, String name, String address) {
+    public SightsData(int id, String name, String address, String category) {
         mId = id;
         mName = name;
         mAddress = address;
+        mCategory = category;
     }
 
     public int getId() {
@@ -29,16 +31,20 @@ public class SightsData implements Serializable {
         return mAddress;
     }
 
+    public String getCategory() {
+        return mCategory;
+    }
+
     private static int lastContactId = 0;
 
     public static List<SightsData> createSightsList(int numContacts) {
         List<SightsData> sights = new ArrayList<>();
 
         for (int i = 1; i <= numContacts; i++) {
-            sights.add(new SightsData(i,"관광지 " + i, "주소 " + i));
+            sights.add(new SightsData(i,"관광지 " + i, "주소 " + i, "고궁"));
         }
 
-        sights.add(new SightsData(numContacts++,"아름", "테스트"));
+        sights.add(new SightsData(numContacts++,"아름", "테스트","공원"));
         return sights;
     }
 }
