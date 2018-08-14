@@ -10,8 +10,8 @@ import com.walk.angel.angelwalk.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button btnLogin;
-    Button btnRegister;
+    private Button btnLogin;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
