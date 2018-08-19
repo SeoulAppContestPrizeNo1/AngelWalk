@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Adapter.PostAdapter;
@@ -22,18 +23,33 @@ public class PostActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<PostData> listOfPostData = new ArrayList<>();
     List<PostData> listOfCurrentPostData = new ArrayList<>();
+    Button btnPosting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        btnPosting = (Button) findViewById(R.id.btnPosting);
+        btnPosting.setOnClickListener(btnClickListener);
 
         listOfPostData = PostData.createPostList(20);
         listOfCurrentPostData = listOfPostData;
         setupViews();
 
     }
+
+    private Button.OnClickListener btnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.btnPosting:
+                    Intent intentPosting = new Intent(PostActivity.this, PostingActivity.class);
+                    startActivity(intentPosting);
+                    break;
+            }
+        }
+    };
 
     void setupViews() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_post);
@@ -68,6 +84,8 @@ public class PostActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
 
     }
 

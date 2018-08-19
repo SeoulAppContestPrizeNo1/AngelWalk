@@ -10,13 +10,24 @@ public class PostData implements Serializable {
 
     private String mAuthor;
     private String mTitle;
+    private String mContent;
 
     public PostData(int id, String author, String title) {
         mId = id;
         mAuthor = author;
         mTitle = title;
     }
-
+    public PostData(int id, String author, String title, String content) {
+        mId = id;
+        mAuthor = author;
+        mTitle = title;
+        mContent = content;
+    }
+    public PostData(String author, String title, String content) {
+        mAuthor = author;
+        mTitle = title;
+        mContent = content;
+    }
     public int getId() {
         return mId;
     }
@@ -27,6 +38,10 @@ public class PostData implements Serializable {
 
     public String getTitle() {
         return mTitle;
+    }
+
+    public String getContent() {
+        return mContent;
     }
 
 
