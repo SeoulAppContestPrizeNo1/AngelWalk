@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         setImage = (ImageView)findViewById(R.id.setImage);
 
-        editId = (EditText) findViewById(R.id.editUsername);
+        editId = (EditText) findViewById(R.id.editId);
         editPassword = (EditText) findViewById(R.id.editPassword);
         editPasswordCheck = (EditText) findViewById(R.id.editPasswordCheck);
         editUserNickName = (EditText) findViewById(R.id.editUserNickname);
@@ -103,12 +103,14 @@ public class RegisterActivity extends AppCompatActivity {
     public void connectServer(String userId, String userPassword, String userNickname){
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-        Call<SignupData> call = serverAPI.sendSignupData(userId, userPassword, userNickname);
+        Call<SignupData> call = serverAPI.sendSignupData(userId, userNickname, userPassword);
 
         call.enqueue(new Callback<SignupData>() {
             @Override
             public void onResponse(Call<SignupData> call, Response<SignupData> response) {
                 try{
+
+                    Log.d("info", "response :: " + response.code());
                     if(response.isSuccessful()) { // 200번대
 
                         SignupData signupData = response.body();
