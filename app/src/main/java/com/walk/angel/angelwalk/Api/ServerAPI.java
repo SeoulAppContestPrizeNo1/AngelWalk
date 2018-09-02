@@ -1,6 +1,7 @@
 package com.walk.angel.angelwalk.Api;
 
 import com.walk.angel.angelwalk.Data.LoginData;
+import com.walk.angel.angelwalk.Data.SignupData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -11,5 +12,11 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST("user/signIn")
     Call<LoginData> sendLoginData(@Field("userId") String userId, @Field("userPassword") String userPassword);
+
+    @FormUrlEncoded
+    @POST("user/signUp")
+    Call<SignupData> sendSignupData(@Field("userId") String userId,
+                                    @Field("userPassword") String userPassword,
+                                    @Field("userNickname") String userNickname);
 
 }
