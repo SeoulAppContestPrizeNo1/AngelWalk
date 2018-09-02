@@ -25,7 +25,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:ems="10"
-                android:hint="ID" />
+                android:hint="ID"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -40,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:hint="Password" />
+                android:hint="Password"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -55,14 +57,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:hint="Password Check" />
+                android:hint="Password Check"
+                android:singleLine="true"/>
 
             <ImageView
                 android:id="@+id/setImage"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitStart" />
+                android:scaleType="fitStart"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -77,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:hint="Nickname" />
+                android:hint="Nickname"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 

@@ -88,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         connectServer(editId.getText().toString(),
                                 editPassword.getText().toString(),
+                                editPasswordCheck.getText().toString(),
                                 editUserNickName.getText().toString());
 
                     }else{
@@ -100,10 +101,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    public void connectServer(String userId, String userPassword, String userNickname){
+    public void connectServer(String userId, String userPassword, String userPasswordCheck, String userNickname){
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-        Call<SignupData> call = serverAPI.sendSignupData(userId, userNickname, userPassword);
+        Call<SignupData> call = serverAPI.sendSignupData(userId, userNickname, userPassword, userPasswordCheck);
 
         call.enqueue(new Callback<SignupData>() {
             @Override
@@ -116,7 +117,9 @@ public class RegisterActivity extends AppCompatActivity {
                         SignupData signupData = response.body();
                         String result = signupData.getResult();
 
-                        if(result.equals("Success")){
+                        Toast.makeText(RegisterActivity.this, "response : "+response.code(), Toast.LENGTH_SHORT).show();
+                        Log.d("info", "response :: " + response.code());
+                        if("Success".equals(result)){
                             Intent intentMain = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intentMain);
                         }
