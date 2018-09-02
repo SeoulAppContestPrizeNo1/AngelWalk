@@ -2,6 +2,7 @@ package com.walk.angel.angelwalk.Api;
 
 import com.walk.angel.angelwalk.Data.LoginData;
 import com.walk.angel.angelwalk.Data.board.BoardList;
+import com.walk.angel.angelwalk.Data.SignupData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,8 +13,14 @@ import retrofit2.http.Query;
 
 public interface ServerAPI {
     @FormUrlEncoded
-    @POST("user/signIn")
-    Call<LoginData> sendLoginData(@Field("userId") String userId, @Field("userPassword") String userPassword);
+    @POST("user/sign-in")
+    Call<LoginData> sendLoginData(@Field("id") String userId, @Field("password") String userPassword);
+
+    @FormUrlEncoded
+    @POST("user/sign-up")
+    Call<SignupData> sendSignupData(@Field("id") String userId,
+                                    @Field("nickName") String userNickname,
+                                    @Field("password") String userPassword);
 
     @GET("board/boardList")
     Call<BoardList> getBoardList(@Query("pageNumber") int pageNumber);
