@@ -1,13 +1,30 @@
 package com.walk.angel.angelwalk.Data.board;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
 public class BoardData {
+    @SerializedName("index")
     private int boardIndex;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("content")
     private String content;
+
+    @SerializedName("creatorName")
     private String creatorName;
+
+    @SerializedName("isLike")
     private boolean isLike;
+
+    @SerializedName("isLikeCount")
     private int isLikeCount;
-    private String comment;
+
+    @SerializedName("comments")
+    private ArrayList<CommentData> arrayListOfCommentData = new ArrayList<>();
 
     public int getBoardIndex() {
         return boardIndex;
@@ -57,11 +74,11 @@ public class BoardData {
         this.isLikeCount = isLikeCount;
     }
 
-    public String getComment() {
-        return comment;
+    public ArrayList<CommentData> getArrayListOfCommentData() {
+        return arrayListOfCommentData;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setArrayListOfCommentData(ArrayList<CommentData> arrayListOfCommentData) {
+        this.arrayListOfCommentData = arrayListOfCommentData;
     }
 }
