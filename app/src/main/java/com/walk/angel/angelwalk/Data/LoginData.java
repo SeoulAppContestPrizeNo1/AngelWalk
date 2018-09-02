@@ -2,17 +2,15 @@ package com.walk.angel.angelwalk.Data;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginData {
+public class LoginData extends CommonData{
+    @SerializedName("data")
+    private String token;
 
-    @SerializedName("res")
-    private String result;
-
-
-    public String getResult() {
-        return result;
+    public String getToken() {
+        return token;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
