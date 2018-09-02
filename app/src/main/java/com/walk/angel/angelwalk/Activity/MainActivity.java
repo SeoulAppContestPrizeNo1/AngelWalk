@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("MAP"));
         tabLayout.addTab(tabLayout.newTab().setText("HOME"));
+        tabLayout.addTab(tabLayout.newTab().setText("BOARD"));
         tabLayout.addTab(tabLayout.newTab().setText("SETTING"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

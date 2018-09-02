@@ -31,7 +31,8 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.PostActivity" />
         <activity android:name=".Activity.PostDetailActivity" />
-        <activity android:name=".Activity.PostingActivity"></activity>
+        <activity android:name=".Activity.PostingActivity" />
+        <activity android:name=".Activity.BoardActivity"></activity>
     </application>
 
 </manifest>
