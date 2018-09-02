@@ -1,6 +1,5 @@
 package com.walk.angel.angelwalk.Api;
 
-import com.walk.angel.angelwalk.Data.LoginData;
 import com.walk.angel.angelwalk.Data.SignupData;
 
 import retrofit2.Call;

@@ -1,7 +1,6 @@
 package com.walk.angel.angelwalk.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Api.ServerAPI;
-import com.walk.angel.angelwalk.Data.LoginData;
 import com.walk.angel.angelwalk.Data.SignupData;
 import com.walk.angel.angelwalk.R;
 
