@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         bPasswordCheck = false;
 
-        setImage = (ImageView)findViewById(R.id.setImage);
+        //setImage = (ImageView)findViewById(R.id.setImage);
 
         editId = (EditText) findViewById(R.id.editId);
         editPassword = (EditText) findViewById(R.id.editPassword);
@@ -63,11 +63,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirm = editPasswordCheck.getText().toString();
 
                 if(password.equals(confirm)){
-                    setImage.setImageResource(R.drawable.sign_up_password_pass);
+                   // setImage.setImageResource(R.drawable.sign_up_password_pass);
+                    editPasswordCheck.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.sign_up_password_pass,0);
                     bPasswordCheck = true;
                 }
                 else {
-                    setImage.setImageResource(R.drawable.sign_up_password_fail);
+                    //setImage.setImageResource(R.drawable.sign_up_password_fail);
+                    editPasswordCheck.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.sign_up_password_fail,0);
                     bPasswordCheck = false;
                 }
             }
