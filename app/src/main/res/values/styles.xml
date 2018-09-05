@@ -6,6 +6,9 @@
         <item name="colorPrimary">#E8890D</item>
         <item name="colorPrimaryDark">#E8890D</item>
         <item name="colorAccent">#E8890D</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

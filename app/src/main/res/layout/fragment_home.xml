@@ -11,49 +11,83 @@ android:id="@+id/fragmentHome">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="4">
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/mainImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            app:srcCompat="@android:color/darker_gray" />
 
         <Button
             android:id="@+id/btnCard"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="복지카드"
-            android:layout_weight="1"/>
+            android:layout_height="10dp"
+            android:text="복지카드 보기"
+            android:textColor="#918F90"
+            android:layout_weight="1"
+            android:background="@drawable/main_card_button"/>
 
         <LinearLayout
             android:id="@+id/wrapOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="3"
-            android:layout_weight="3"
-            app:layout_constraintTop_toBottomOf="@+id/btnCard">
-
-            <Button
-                android:id="@+id/btnCharging"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="휠체어 충전소"/>
+            android:weightSum="2"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnTourism"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="관광지"/>
+                android:textColor="#918F90"
+                android:text="관광지"
+                android:gravity="bottom|center"
+                />
 
+            <Button
+                android:id="@+id/btnCharging"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#918F90"
+                android:text="휠체어 충전소"
+                android:gravity="bottom|center"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/wrapTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_weight="2"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnPost"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="커뮤니티"/>
+                android:text="커뮤니티"
+                android:textColor="#918F90"
+                android:gravity="bottom|center"
+                android:layout_margin="5dp"/>
 
+            <Button
+                android:id="@+id/btnHidden"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:visibility="invisible" />
         </LinearLayout>
 
-        
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
