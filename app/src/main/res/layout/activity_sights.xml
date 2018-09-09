@@ -27,35 +27,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="전체"/>
+            android:text="전체"
+            android:background="@drawable/main_card_button"/>
 
         <Button
             android:id="@+id/btnCattle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="고궁"/>
+            android:text="고궁"
+            android:background="@drawable/main_card_button"/>
 
         <Button
             android:id="@+id/btnPark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="공원"/>
+            android:text="공원"
+            android:background="@drawable/main_card_button"/>
 
         <Button
             android:id="@+id/btnSite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="유적지"/>
+            android:text="유적지"
+            android:background="@drawable/main_card_button"/>
 
         <Button
             android:id="@+id/btnMuseum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="박물관"/>
+            android:text="박물관"
+            android:background="@drawable/main_card_button"/>
 
 
     </LinearLayout>

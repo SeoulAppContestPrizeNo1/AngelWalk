@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
                             setPreferences(userId, userPassword, loginData.getToken());
                             Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intentMain);
+                            finish();
                         }
                         else {
                             //to do nothing

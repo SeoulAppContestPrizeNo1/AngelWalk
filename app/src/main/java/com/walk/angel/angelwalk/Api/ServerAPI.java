@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -29,11 +30,10 @@ public interface ServerAPI {
 
     @FormUrlEncoded
     @POST("user/update/nick-name")
-    Call<CommonData> sendNicknameUpdate(@Field("token") String userToken,
-                                    @Field("nickName") String userNickname);
+    Call<CommonData> sendNicknameUpdate(@Field("nickName") String userNickname);
 
     @FormUrlEncoded
     @POST("user/update/password")
-    Call<CommonData> sendPasswordUpdate(@Field("token") String userToken,
-                                        @Field("password") String userPassword);
+    Call<CommonData> sendPasswordUpdate(@Field("currentPassword") String currentPassword,
+                                        @Field("newPassword") String newPassword);
 }

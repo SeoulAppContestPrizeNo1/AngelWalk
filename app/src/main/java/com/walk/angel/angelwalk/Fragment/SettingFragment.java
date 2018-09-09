@@ -11,20 +11,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Activity.LoginActivity;
 import com.walk.angel.angelwalk.Activity.RegisterActivity;
 import com.walk.angel.angelwalk.Api.ServerAPI;
+import com.walk.angel.angelwalk.Api.interceptor.CookieInterceptor;
 import com.walk.angel.angelwalk.Data.CommonData;
 import com.walk.angel.angelwalk.Data.SignupData;
 import com.walk.angel.angelwalk.R;
 
+import org.w3c.dom.Text;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.walk.angel.angelwalk.Api.ServerURL.BASE_URL;
@@ -33,6 +40,7 @@ public class SettingFragment extends Fragment {
 
     private EditText editNickname;
     private EditText editPassword;
+    private TextView txtUserId;
     private Button btnNicknameChange;
     private Button btnPasswordChange;
     private Button btnLogout;
@@ -43,6 +51,7 @@ public class SettingFragment extends Fragment {
 
     private SharedPreferences pref;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup SettingFragment = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
@@ -50,10 +59,14 @@ public class SettingFragment extends Fragment {
         pref = getActivity().getSharedPreferences("login", MODE_PRIVATE);
         token = pref.getString("token", "");
         userId = pref.getString("id", "");
-        userPassword = pref.getString("id", "");
+        userPassword = pref.getString("password", "");
+
+        txtUserId = (TextView) SettingFragment.findViewById(R.id.textId);
+        txtUserId.setText(userId+" 님");
 
         editNickname = (EditText) SettingFragment.findViewById(R.id.editNickName);
         editPassword = (EditText) SettingFragment.findViewById(R.id.editPassword);
+        editPassword.setText(userPassword);
 
         btnNicknameChange = (Button) SettingFragment.findViewById(R.id.btnChangeNickname);
         btnPasswordChange = (Button) SettingFragment.findViewById(R.id.btnChangePassword);
@@ -62,6 +75,7 @@ public class SettingFragment extends Fragment {
         btnNicknameChange.setOnClickListener(btnClickListener);
         btnPasswordChange.setOnClickListener(btnClickListener);
         btnLogout.setOnClickListener(btnClickListener);
+
 
         return SettingFragment;
     }
@@ -79,13 +93,13 @@ public class SettingFragment extends Fragment {
                     break;
 
                 case R.id.btnChangePassword:
-                    if (editNickname.getText().toString() == null || "".equals(editNickname.getText().toString())) {
+                    if (editPassword.getText().toString() == null || "".equals(editPassword.getText().toString())) {
                         Toast.makeText(getView().getContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
                     }else if(editNickname.getText().toString() == userPassword || editNickname.getText().toString().equals(userPassword)){
                         Toast.makeText(getView().getContext(), "이전 비밀번호와 똑같습니다.", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        connectServerForPassword(editPassword.getText().toString());
+                        connectServerForPassword(userPassword, editPassword.getText().toString());
                     }
                     break;
 
@@ -98,10 +112,14 @@ public class SettingFragment extends Fragment {
         }
     };
 
+
     public void connectServerForNickname(String userNickname){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        CookieInterceptor cookieInterceptor = new CookieInterceptor(getActivity().getApplicationContext());
+        OkHttpClient client = new OkHttpClient.Builder().addNetworkInterceptor(cookieInterceptor).build();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
         ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-        Call<CommonData> call = serverAPI.sendNicknameUpdate(token, userNickname);
+        Call<CommonData> call = serverAPI.sendNicknameUpdate(userNickname);
 
         call.enqueue(new Callback<CommonData>() {
             @Override
@@ -114,7 +132,7 @@ public class SettingFragment extends Fragment {
                         String result = commonData.getResult();
 
                         if("Success".equals(result)){
-
+                            Toast.makeText(getView().getContext(), "닉네임이 변경되었습니다.", Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getView().getContext(), commonData.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -134,10 +152,13 @@ public class SettingFragment extends Fragment {
         });
     }
 
-    public void connectServerForPassword(String userPassword){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+    public void connectServerForPassword(final String currentPassword, final String newPassword){
+        CookieInterceptor cookieInterceptor = new CookieInterceptor(getActivity().getApplicationContext());
+        OkHttpClient client = new OkHttpClient.Builder().addNetworkInterceptor(cookieInterceptor).build();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
         ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-        Call<CommonData> call = serverAPI.sendPasswordUpdate(token, userPassword);
+        Call<CommonData> call = serverAPI.sendPasswordUpdate(currentPassword,  newPassword);
 
         call.enqueue(new Callback<CommonData>() {
             @Override
@@ -149,8 +170,13 @@ public class SettingFragment extends Fragment {
                         CommonData commonData = response.body();
                         String result = commonData.getResult();
 
+                        Toast.makeText(getView().getContext(), result, Toast.LENGTH_SHORT).show();
+
                         if("Success".equals(result)){
 
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("password", newPassword);
+                            Toast.makeText(getView().getContext(), "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getView().getContext(), commonData.getMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -159,7 +185,7 @@ public class SettingFragment extends Fragment {
                         Toast.makeText(getView().getContext(), response.code(), Toast.LENGTH_SHORT).show();
                     }
                 }catch (Exception e){
-                    Log.d("error", "Login Error is " + e.toString());
+                    Log.d("error", "Modify Password Error is " + e.toString());
                 }
             }
 

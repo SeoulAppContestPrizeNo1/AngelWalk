@@ -83,7 +83,6 @@ public class MapFragment extends Fragment {
                     100, // 통지사이의 최소 시간간격 (miliSecond)
                     1, // 통지사이의 최소 변경거리 (m)
                     mLocationListener);
-            Toast.makeText(getActivity(), "DD", Toast.LENGTH_SHORT).show();
         } catch(SecurityException e){
             e.printStackTrace();
         }
