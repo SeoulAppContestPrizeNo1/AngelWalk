@@ -25,7 +25,9 @@
         </activity>
 
         <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.SightsActivity" />
+        <activity
+            android:name=".Activity.SightsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".Activity.SightInfoActivity" />
         <activity android:name=".Activity.WheelchairChargingActivity" />
         <activity android:name=".Activity.WheelchairChargingInfoActivity" />
