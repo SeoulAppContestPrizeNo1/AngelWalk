@@ -12,28 +12,34 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/angel_walk_log" />
 
         <TextView
             android:id="@+id/textId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="50dp"
             android:text="아이디" />
 
         <LinearLayout
             android:id="@+id/Layout1"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:weightSum="4">
+            android:weightSum="5">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/editNickName_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="4">
 
                 <EditText
                     android:id="@+id/editNickName"
@@ -47,29 +53,29 @@
 
             <Button
                 android:id="@+id/btnChangeNickname"
-                android:text="변경"
-                android:textColor="#E8890D"
-                android:background="@drawable/shape_white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"/>
+                android:background="@drawable/icon_change"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
         <LinearLayout
             app:layout_constraintTop_toBottomOf="@+id/Layout1"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:weightSum="4">
+            android:weightSum="5">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/editPassword_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="4">
 
                 <EditText
                     android:id="@+id/editPassword"
@@ -81,12 +87,12 @@
 
             <Button
                 android:id="@+id/btnChangePassword"
-                android:text="변경"
-                android:textColor="#E8890D"
-                android:background="@drawable/shape_white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"/>
+                android:background="@drawable/icon_change"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
@@ -96,7 +102,8 @@
             android:text="로그아웃"
             android:textColor="#FFFFFF"
             android:background="@drawable/shape"
-            android:layout_width="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
