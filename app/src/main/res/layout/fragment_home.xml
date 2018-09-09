@@ -45,8 +45,7 @@ android:id="@+id/fragmentHome">
                 android:layout_weight="1"
                 android:textColor="#918F90"
                 android:text="관광지"
-                android:gravity="bottom|center"
-                />
+                android:gravity="bottom|center"/>
 
             <Button
                 android:id="@+id/btnCharging"

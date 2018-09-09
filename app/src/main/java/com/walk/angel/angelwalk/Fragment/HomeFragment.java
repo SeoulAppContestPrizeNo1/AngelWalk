@@ -22,12 +22,13 @@ import com.walk.angel.angelwalk.R;
 
 public class HomeFragment extends Fragment {
 
-    Button btnTourism, btnCharging, btnPost;
+    Button btnCard, btnTourism, btnCharging, btnPost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup HomeFragment = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
+        btnCard = (Button) HomeFragment.findViewById(R.id.btnCard);
 
         btnTourism = (Button) HomeFragment.findViewById(R.id.btnTourism);
         btnTourism.setOnClickListener(btnClickListener);

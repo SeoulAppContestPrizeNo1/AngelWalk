@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_map));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_home));
-        tabLayout.addTab(tabLayout.newTab().setText("BOARD"));
+        //tabLayout.addTab(tabLayout.newTab().setText("BOARD"));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_setting));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

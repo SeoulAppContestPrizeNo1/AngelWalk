@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
         if (check){
             Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intentMain);
+            finish();
         }
         else {
             // to do nothing
