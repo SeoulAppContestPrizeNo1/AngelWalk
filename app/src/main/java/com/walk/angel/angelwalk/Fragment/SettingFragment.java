@@ -35,16 +35,19 @@ public class SettingFragment extends Fragment {
     private EditText editPassword;
     private Button btnNicknameChange;
     private Button btnPasswordChange;
+    private Button btnLogout;
 
     private String token;
     private String userId;
     private String userPassword;
 
+    private SharedPreferences pref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup SettingFragment = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
 
-        SharedPreferences pref = getActivity().getSharedPreferences("login", MODE_PRIVATE);
+        pref = getActivity().getSharedPreferences("login", MODE_PRIVATE);
         token = pref.getString("token", "");
         userId = pref.getString("id", "");
         userPassword = pref.getString("id", "");
@@ -54,9 +57,11 @@ public class SettingFragment extends Fragment {
 
         btnNicknameChange = (Button) SettingFragment.findViewById(R.id.btnChangeNickname);
         btnPasswordChange = (Button) SettingFragment.findViewById(R.id.btnChangePassword);
+        btnLogout = (Button) SettingFragment.findViewById(R.id.btnLogout);
 
         btnNicknameChange.setOnClickListener(btnClickListener);
         btnPasswordChange.setOnClickListener(btnClickListener);
+        btnLogout.setOnClickListener(btnClickListener);
 
         return SettingFragment;
     }
@@ -83,6 +88,12 @@ public class SettingFragment extends Fragment {
                         connectServerForPassword(editPassword.getText().toString());
                     }
                     break;
+
+                case R.id.btnLogout:
+                    removePreferences();
+                    Intent intentLogout = new Intent(getView().getContext(), LoginActivity.class);
+                    startActivity(intentLogout);
+                    getActivity().finish();
             }
         }
     };
@@ -157,6 +168,12 @@ public class SettingFragment extends Fragment {
 
             }
         });
+    }
+    //값 삭제하기
+    private  void  removePreferences(){
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
     }
 
 }

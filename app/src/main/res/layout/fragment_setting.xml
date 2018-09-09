@@ -17,10 +17,12 @@
             android:id="@+id/textId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:text="아이디" />
 
         <LinearLayout
             android:id="@+id/Layout1"
+            android:layout_marginHorizontal="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -46,6 +48,8 @@
             <Button
                 android:id="@+id/btnChangeNickname"
                 android:text="변경"
+                android:textColor="#E8890D"
+                android:background="@drawable/shape_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"/>
@@ -54,6 +58,7 @@
 
         <LinearLayout
             app:layout_constraintTop_toBottomOf="@+id/Layout1"
+            android:layout_marginHorizontal="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -77,12 +82,22 @@
             <Button
                 android:id="@+id/btnChangePassword"
                 android:text="변경"
+                android:textColor="#E8890D"
+                android:background="@drawable/shape_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"/>
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_marginTop="20dp"
+            android:text="로그아웃"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

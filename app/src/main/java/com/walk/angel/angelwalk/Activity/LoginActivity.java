@@ -137,11 +137,5 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
         editor.putString("token", token);
         editor.commit();
     }
-    //값 삭제하기
-    private  void  removePreferences(){
-        SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.commit();
-    }
+
 }
