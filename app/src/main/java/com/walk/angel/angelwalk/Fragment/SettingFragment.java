@@ -62,7 +62,7 @@ public class SettingFragment extends Fragment {
         userPassword = pref.getString("password", "");
 
         txtUserId = (TextView) SettingFragment.findViewById(R.id.textId);
-        txtUserId.setText(userId+" 님");
+        txtUserId.setText(userId+" ");
 
         editNickname = (EditText) SettingFragment.findViewById(R.id.editNickName);
         editPassword = (EditText) SettingFragment.findViewById(R.id.editPassword);
