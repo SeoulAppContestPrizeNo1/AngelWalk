@@ -17,13 +17,14 @@ android:id="@+id/fragmentHome">
             android:id="@+id/mainImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            app:srcCompat="@android:color/darker_gray" />
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:src="@drawable/main_image" />
 
         <Button
             android:id="@+id/btnCard"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="15dp"
             android:text="복지카드 보기"
             android:textColor="#918F90"
             android:layout_weight="1"

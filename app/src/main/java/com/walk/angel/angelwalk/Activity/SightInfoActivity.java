@@ -12,6 +12,7 @@ public class SightInfoActivity extends AppCompatActivity {
 
     TextView txtSightInfoName;
     TextView txtSightInfoAddress;
+    TextView txtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +22,13 @@ public class SightInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         SightsData data = (SightsData) intent.getSerializableExtra("sightsInfo");
 
-        txtSightInfoName = (TextView) findViewById(R.id.txtSightInfoName);
-        txtSightInfoAddress = (TextView) findViewById(R.id.txtSightInfoAddress);
+        txtTitle = (TextView) findViewById(R.id.txt_sight_name);
+        txtSightInfoName = (TextView) findViewById(R.id.sightInfo_name);
+        txtSightInfoAddress = (TextView) findViewById(R.id.sightInfo_address);
 
         // Data TextView에 적용
         txtSightInfoName.setText(data.getName());
         txtSightInfoAddress.setText(data.getAddress());
-
+        txtTitle.setText(data.getName());
     }
 }
