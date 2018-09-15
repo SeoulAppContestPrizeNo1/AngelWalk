@@ -1,22 +1,51 @@
 package com.walk.angel.angelwalk.Data.board;
 
-public class CommentData {
-    private String comment;
-    private String creatorId;
+import com.google.gson.annotations.SerializedName;
 
-    public String getComment() {
-        return comment;
+import java.io.Serializable;
+
+public class CommentData implements Serializable {
+    @SerializedName("seq")
+    private int commentIndex;
+
+    @SerializedName("content")
+    private String content;
+
+    @SerializedName("date")
+    private String createDate;
+
+    @SerializedName("nickName")
+    private String nickName;
+
+    public int getCommentIndex() {
+        return commentIndex;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setCommentIndex(int commentIndex) {
+        this.commentIndex = commentIndex;
     }
 
-    public String getCreatorId() {
-        return creatorId;
+    public String getContent() {
+        return content;
     }
 
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

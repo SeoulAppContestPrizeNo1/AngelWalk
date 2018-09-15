@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class BoardList {
+public class CommentList {
     @SerializedName("stat")
     private String result;
 
@@ -12,7 +12,8 @@ public class BoardList {
     private String message;
 
     @SerializedName("data")
-    private ArrayList<BoardData> arrayListOfBoardData = new ArrayList<>();
+    private ArrayList<CommentData> arrayListOfCommentData = new ArrayList<>();
+
 
     public String getResult() {
         return result;
@@ -30,11 +31,11 @@ public class BoardList {
         this.message = message;
     }
 
-    public ArrayList<BoardData> getArrayListOfBoardData() {
-        return arrayListOfBoardData;
+    public ArrayList<CommentData> getArrayListOfCommentData() {
+        return arrayListOfCommentData;
     }
 
-    public void setArrayListOfBoardData(ArrayList<BoardData> arrayListOfBoardData) {
-        this.arrayListOfBoardData = arrayListOfBoardData;
+    public void setArrayListOfCommentData(ArrayList<CommentData> arrayListOfCommentData) {
+        this.arrayListOfCommentData = arrayListOfCommentData;
     }
 }

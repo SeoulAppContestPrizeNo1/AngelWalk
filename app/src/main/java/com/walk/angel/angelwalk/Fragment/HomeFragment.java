@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.walk.angel.angelwalk.Activity.BoardActivity;
 import com.walk.angel.angelwalk.Activity.MainActivity;
 import com.walk.angel.angelwalk.Activity.PostActivity;
 import com.walk.angel.angelwalk.Activity.SightsActivity;
@@ -57,8 +58,8 @@ public class HomeFragment extends Fragment {
                     break;
 
                 case R.id.btnPost:
-                    Intent intentPost = new Intent(getView().getContext(), PostActivity.class);
-                    startActivity(intentPost);
+                    Intent intentBoard = new Intent(getView().getContext(), BoardActivity.class);
+                    startActivity(intentBoard);
             }
         }
     };

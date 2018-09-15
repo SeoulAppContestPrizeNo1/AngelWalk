@@ -19,10 +19,10 @@
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.SightsActivity" />
         <activity android:name=".Activity.SightInfoActivity" />
@@ -32,7 +32,10 @@
         <activity android:name=".Activity.PostActivity" />
         <activity android:name=".Activity.PostDetailActivity" />
         <activity android:name=".Activity.PostingActivity" />
-        <activity android:name=".Activity.BoardActivity"></activity>
+        <activity android:name=".Activity.BoardActivity" />
+        <activity android:name=".Activity.BoardDetailActivity" />
+        <activity android:name=".Activity.CommentActivity" />
+        <activity android:name=".Activity.EditBoardActivity"></activity>
     </application>
 
 </manifest>

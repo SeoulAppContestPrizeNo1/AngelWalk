@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.BoardActivity"
+    android:background="#ffffff">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/boardRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    
+    <Button
+        android:id="@+id/btnEditBoard"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/fab_shape_rectangle_266_rectangle_267_triangle_12"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/boardRecyclerView"
+        app:layout_anchorGravity="bottom|right|end"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

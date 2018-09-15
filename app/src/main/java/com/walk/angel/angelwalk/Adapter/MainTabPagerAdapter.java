@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.walk.angel.angelwalk.Fragment.BoardFragment;
 import com.walk.angel.angelwalk.Fragment.HomeFragment;
 import com.walk.angel.angelwalk.Fragment.MapFragment;
 import com.walk.angel.angelwalk.Fragment.SettingFragment;
@@ -30,11 +29,7 @@ public class MainTabPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 HomeFragment home = new HomeFragment();
                 return home;
-
             case 2:
-                BoardFragment board = new BoardFragment();
-                return board;
-            case 3:
                 SettingFragment setting = new SettingFragment();
                 return setting;
             default:

@@ -1,30 +1,41 @@
 package com.walk.angel.angelwalk.Data.board;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 public class BoardData {
-    @SerializedName("index")
+
+    @SerializedName("nickName")
+    private String nickName;
+
+    @SerializedName("seq")
     private int boardIndex;
 
     @SerializedName("title")
     private String title;
 
+    @Nullable
     @SerializedName("content")
     private String content;
 
-    @SerializedName("creatorName")
-    private String creatorName;
+    @SerializedName("likeCount")
+    private int likeCount;
 
-    @SerializedName("isLike")
-    private boolean isLike;
+    @SerializedName("date")
+    private String CreateDate;
 
-    @SerializedName("isLikeCount")
-    private int isLikeCount;
+    @Nullable
+    @SerializedName("likeStatus")
+    private int likeStatus;
 
-    @SerializedName("comments")
-    private ArrayList<CommentData> arrayListOfCommentData = new ArrayList<>();
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public int getBoardIndex() {
         return boardIndex;
@@ -42,43 +53,36 @@ public class BoardData {
         this.title = title;
     }
 
+    @Nullable
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(@Nullable String content) {
         this.content = content;
     }
 
-    public String getCreatorName() {
-        return creatorName;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 
-    public boolean isLike() {
-        return isLike;
+    public String getCreateDate() {
+        return CreateDate;
     }
 
-    public void setLike(boolean like) {
-        isLike = like;
+    public void setCreateDate(String createDate) {
+        CreateDate = createDate;
     }
 
-    public int getIsLikeCount() {
-        return isLikeCount;
+    public int getLikeStatus() {
+        return likeStatus;
     }
 
-    public void setIsLikeCount(int isLikeCount) {
-        this.isLikeCount = isLikeCount;
-    }
-
-    public ArrayList<CommentData> getArrayListOfCommentData() {
-        return arrayListOfCommentData;
-    }
-
-    public void setArrayListOfCommentData(ArrayList<CommentData> arrayListOfCommentData) {
-        this.arrayListOfCommentData = arrayListOfCommentData;
+    public void setLikeStatus(int likeStatus) {
+        this.likeStatus = likeStatus;
     }
 }
