@@ -8,57 +8,101 @@
     android:orientation="vertical">
 
 
-    <EditText
-        android:id="@+id/editTxtSearch"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="검색어를 입력하세요."
-        android:singleLine="true"/>
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icon_sights"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관광지"
+            android:layout_weight="6"
+            android:textColor="#525051"
+            android:textSize="25dp"
+            android:layout_gravity="bottom"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/wrapOne"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="5"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp">
 
         <Button
             android:id="@+id/btnAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="전체"/>
+            android:text="전체"
+            android:background="#ffffff"
+            android:layout_marginRight="2dp"/>
 
         <Button
             android:id="@+id/btnCattle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="고궁"/>
+            android:text="고궁"
+            android:background="#ffffff"
+            android:layout_marginRight="2dp"/>
 
         <Button
             android:id="@+id/btnPark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="공원"/>
+            android:text="공원"
+            android:background="#ffffff"
+            android:layout_marginRight="2dp"/>
 
         <Button
             android:id="@+id/btnSite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="유적지"/>
+            android:text="유적지"
+            android:background="#ffffff"
+            android:layout_marginRight="2dp"/>
 
         <Button
             android:id="@+id/btnMuseum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="박물관"/>
+            android:text="박물관"
+            android:background="#ffffff"
+            android:layout_marginRight="2dp"/>
 
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTxtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="검색어를 입력하세요."
+        android:backgroundTint="#525051"
+        android:textCursorDrawable="@color/colorPrimaryDark"
+        android:singleLine="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -68,7 +112,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_sight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
 
     </LinearLayout>
 </LinearLayout>

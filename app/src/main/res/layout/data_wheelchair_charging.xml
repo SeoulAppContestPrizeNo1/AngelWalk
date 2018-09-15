@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="100dp"
-    android:background="@drawable/temp_background"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="7dp">
 
     <ImageView
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:id="@+id/txtChargingAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="#403F3F"
             android:textSize="20sp"
             android:text="주소"
             android:layout_marginLeft="10dp"

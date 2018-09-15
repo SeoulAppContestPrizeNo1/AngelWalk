@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing the TabLayout
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("MAP"));
-        tabLayout.addTab(tabLayout.newTab().setText("HOME"));
-        tabLayout.addTab(tabLayout.newTab().setText("BOARD"));
-        tabLayout.addTab(tabLayout.newTab().setText("SETTING"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_map));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_home));
+        //tabLayout.addTab(tabLayout.newTab().setText("BOARD"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.icon_setting));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         // Set TabSelectedListener

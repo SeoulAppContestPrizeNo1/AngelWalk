@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Activity.BoardActivity;
@@ -23,12 +24,15 @@ import com.walk.angel.angelwalk.R;
 
 public class HomeFragment extends Fragment {
 
-    Button btnTourism, btnCharging, btnPost;
+    private Button btnCard, btnTourism, btnCharging, btnPost;
+    private ImageView mainImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup HomeFragment = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
+        mainImage = (ImageView) HomeFragment.findViewById(R.id.mainImage);
+        btnCard = (Button) HomeFragment.findViewById(R.id.btnCard);
 
         btnTourism = (Button) HomeFragment.findViewById(R.id.btnTourism);
         btnTourism.setOnClickListener(btnClickListener);

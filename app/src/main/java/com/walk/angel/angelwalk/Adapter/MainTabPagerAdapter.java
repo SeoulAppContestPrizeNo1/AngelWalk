@@ -32,6 +32,9 @@ public class MainTabPagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 SettingFragment setting = new SettingFragment();
                 return setting;
+                //BoardFragment board = new BoardFragment();
+                //return board;
+            //case 3:
             default:
                 return null;
         }

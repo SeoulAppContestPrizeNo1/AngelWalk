@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         bPasswordCheck = false;
 
-        setImage = (ImageView)findViewById(R.id.setImage);
+        //setImage = (ImageView)findViewById(R.id.setImage);
 
         editId = (EditText) findViewById(R.id.editId);
         editPassword = (EditText) findViewById(R.id.editPassword);
@@ -63,11 +63,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirm = editPasswordCheck.getText().toString();
 
                 if(password.equals(confirm)){
-                    setImage.setImageResource(R.drawable.sign_up_password_pass);
+                   // setImage.setImageResource(R.drawable.sign_up_password_pass);
+                    editPasswordCheck.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.sign_up_password_pass,0);
                     bPasswordCheck = true;
                 }
                 else {
-                    setImage.setImageResource(R.drawable.sign_up_password_fail);
+                    //setImage.setImageResource(R.drawable.sign_up_password_fail);
+                    editPasswordCheck.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.sign_up_password_fail,0);
                     bPasswordCheck = false;
                 }
             }
@@ -88,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         connectServer(editId.getText().toString(),
                                 editPassword.getText().toString(),
+                                editPasswordCheck.getText().toString(),
                                 editUserNickName.getText().toString());
 
                     }else{
@@ -100,10 +103,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    public void connectServer(String userId, String userPassword, String userNickname){
+    public void connectServer(String userId, String userPassword, String userPasswordCheck, String userNickname){
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-        Call<SignupData> call = serverAPI.sendSignupData(userId, userNickname, userPassword);
+        Call<SignupData> call = serverAPI.sendSignupData(userId, userNickname, userPassword, userPasswordCheck);
 
         call.enqueue(new Callback<SignupData>() {
             @Override
@@ -116,7 +119,9 @@ public class RegisterActivity extends AppCompatActivity {
                         SignupData signupData = response.body();
                         String result = signupData.getResult();
 
-                        if(result.equals("Success")){
+                        Toast.makeText(RegisterActivity.this, "response : "+response.code(), Toast.LENGTH_SHORT).show();
+                        Log.d("info", "response :: " + response.code());
+                        if("Success".equals(result)){
                             Intent intentMain = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intentMain);
                         }

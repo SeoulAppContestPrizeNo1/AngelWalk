@@ -1,6 +1,7 @@
 package com.walk.angel.angelwalk.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,20 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(btnClickListener);
+
+        checkAutoLogin();
+    }
+
+    public void checkAutoLogin(){
+        boolean check = getPreferences();
+        if (check){
+            Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intentMain);
+            finish();
+        }
+        else {
+            // to do nothing
+        }
     }
 
     private Button.OnClickListener btnClickListener = new View.OnClickListener() {
@@ -47,9 +62,6 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.btnLogin:
-                    Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intentMain);
-
                     connectServer(editId.getText().toString(), editPassword.getText().toString());
                     break;
 
@@ -62,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
         }
     };
 
-    public void connectServer(String userId, String userPassword){
+    public void connectServer(final String userId, final String userPassword){
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         ServerAPI serverAPI = retrofit.create(ServerAPI.class);
         Call<LoginData> call = serverAPI.sendLoginData(userId, userPassword);
@@ -72,8 +84,19 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
             public void onResponse(Call<LoginData> call, Response<LoginData> response) {
                 try{
                     if(response.isSuccessful()) { // 200번대
+                        LoginData loginData = response.body();
+                        String result = loginData.getResult();
 
-
+                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                        if ("Success".equals(result)){
+                            setPreferences(userId, userPassword, loginData.getToken());
+                            Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intentMain);
+                            finish();
+                        }
+                        else {
+                            //to do nothing
+                        }
                     }else{
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             @Override
@@ -93,4 +116,27 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
             }
         });
     }
+
+    // 값 불러오기
+    private boolean getPreferences(){
+        SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+        String myid = pref.getString("id", "");
+        String mypassword = pref.getString("password", "");
+        if(myid == null || myid.equals("")){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    // 값 저장하기
+    private void setPreferences(String id, String password, String token){
+        SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("id", id);
+        editor.putString("password", password);
+        editor.putString("token", token);
+        editor.commit();
+    }
+
 }
