@@ -1,5 +1,6 @@
 package com.walk.angel.angelwalk.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +8,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Api.ServerAPI;
@@ -33,6 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editUserNickName;
     private ImageView setImage;
     private Boolean bPasswordCheck;
+    private InputMethodManager touchBackground;
+    private LinearLayout layoutRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         bPasswordCheck = false;
 
+        layoutRegister = (LinearLayout)findViewById(R.id.layoutRegister);
         //setImage = (ImageView)findViewById(R.id.setImage);
 
         editId = (EditText) findViewById(R.id.editId);
@@ -50,6 +56,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(btnClickListener);
+
+        touchBackground = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        layoutRegister.setOnClickListener(backClickListener);
 
         editPasswordCheck.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,6 +89,18 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    // inputmethod
+    private View.OnClickListener backClickListener = new View.OnClickListener(){
+        @Override
+        public  void onClick(View v)
+        {
+            touchBackground.hideSoftInputFromWindow(editId.getWindowToken(), 0);
+            touchBackground.hideSoftInputFromWindow(editPassword.getWindowToken(), 0);
+            touchBackground.hideSoftInputFromWindow(editPasswordCheck.getWindowToken(), 0);
+            touchBackground.hideSoftInputFromWindow(editUserNickName.getWindowToken(), 0);
+
+        }
+    };
 
     private Button.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
