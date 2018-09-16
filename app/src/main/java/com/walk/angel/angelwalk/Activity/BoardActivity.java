@@ -19,8 +19,8 @@ import com.walk.angel.angelwalk.Api.interceptor.CookieInterceptor;
 import com.walk.angel.angelwalk.Data.board.BoardData;
 import com.walk.angel.angelwalk.Data.board.BoardList;
 import com.walk.angel.angelwalk.R;
+import com.walk.angel.angelwalk.UILocker;
 import com.walk.angel.angelwalk.scroll.EndlessRecyclerViewScrollListener;
-import com.walk.angel.angelwalk.scroll.locker.UILocker;
 
 import java.util.ArrayList;
 
