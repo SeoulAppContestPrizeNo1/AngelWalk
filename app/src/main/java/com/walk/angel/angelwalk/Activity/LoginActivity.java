@@ -1,13 +1,16 @@
 package com.walk.angel.angelwalk.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Api.ServerAPI;
@@ -25,8 +28,10 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
 
     private Button btnLogin;
     private Button btnRegister;
+    private LinearLayout layoutLogin;
     private EditText editId;
     private EditText editPassword;
+    private InputMethodManager touchBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +40,16 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
 
         editId = (EditText) findViewById(R.id.editId);
         editPassword = (EditText) findViewById(R.id.editPassword);
+        layoutLogin = (LinearLayout) findViewById(R.id.layoutLogin);
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(btnClickListener);
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(btnClickListener);
+
+        touchBackground = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        layoutLogin.setOnClickListener(backClickListener);
 
         checkAutoLogin();
     }
@@ -56,6 +65,15 @@ public class LoginActivity extends AppCompatActivity implements ServerURL {
             // to do nothing
         }
     }
+
+    private View.OnClickListener backClickListener = new View.OnClickListener(){
+        @Override
+        public  void onClick(View v)
+        {
+            touchBackground.hideSoftInputFromWindow(editId.getWindowToken(), 0);
+            touchBackground.hideSoftInputFromWindow(editPassword.getWindowToken(), 0);
+        }
+    };
 
     private Button.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override

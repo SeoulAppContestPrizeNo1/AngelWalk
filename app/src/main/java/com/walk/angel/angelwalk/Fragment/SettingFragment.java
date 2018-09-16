@@ -1,5 +1,6 @@
 package com.walk.angel.angelwalk.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +53,8 @@ public class SettingFragment extends Fragment {
     private String userPassword;
 
     private SharedPreferences pref;
+    private LinearLayout layoutSetting;
+    private InputMethodManager touchBackground;
 
 
     @Override
@@ -76,6 +81,10 @@ public class SettingFragment extends Fragment {
         btnPasswordChange.setOnClickListener(btnClickListener);
         btnLogout.setOnClickListener(btnClickListener);
 
+        layoutSetting = (LinearLayout) SettingFragment.findViewById(R.id.layoutSetting);
+
+        touchBackground = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        layoutSetting.setOnClickListener(backClickListener);
 
         return SettingFragment;
     }
@@ -112,6 +121,15 @@ public class SettingFragment extends Fragment {
         }
     };
 
+    // inputmethod
+    private View.OnClickListener backClickListener = new View.OnClickListener(){
+        @Override
+        public  void onClick(View v)
+        {
+            touchBackground.hideSoftInputFromWindow(editNickname.getWindowToken(), 0);
+            touchBackground.hideSoftInputFromWindow(editPassword.getWindowToken(), 0);
+        }
+    };
 
     public void connectServerForNickname(String userNickname){
         CookieInterceptor cookieInterceptor = new CookieInterceptor(getActivity().getApplicationContext());
