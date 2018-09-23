@@ -6,6 +6,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class BoardData {
 
+    @Nullable
+    @SerializedName("stat")
+    private String result;
+
+    @Nullable
+    @SerializedName("msg")
+    private String message;
+
     @SerializedName("nickName")
     private String nickName;
 
@@ -28,6 +36,24 @@ public class BoardData {
     @Nullable
     @SerializedName("likeStatus")
     private int likeStatus;
+
+    @Nullable
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(@Nullable String result) {
+        this.result = result;
+    }
+
+    @Nullable
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(@Nullable String message) {
+        this.message = message;
+    }
 
     public String getNickName() {
         return nickName;

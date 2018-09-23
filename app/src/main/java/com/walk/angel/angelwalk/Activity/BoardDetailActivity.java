@@ -14,10 +14,13 @@ import com.walk.angel.angelwalk.Api.ServerAPI;
 import com.walk.angel.angelwalk.Api.ServerURL;
 import com.walk.angel.angelwalk.Api.interceptor.CookieInterceptor;
 import com.walk.angel.angelwalk.Data.board.BoardData;
+import com.walk.angel.angelwalk.Data.board.BoardDetailData;
+import com.walk.angel.angelwalk.Data.board.BoardList;
 import com.walk.angel.angelwalk.Data.board.CommentData;
 import com.walk.angel.angelwalk.Data.board.CommentList;
 import com.walk.angel.angelwalk.R;
-import com.walk.angel.angelwalk.scroll.locker.UILocker;
+import com.walk.angel.angelwalk.UILocker;
+
 
 import java.util.ArrayList;
 
@@ -66,7 +69,8 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_detail);
         ButterKnife.bind(this);
-        uiLocker = new UILocker(getApplicationContext());
+        uiLocker = new UILocker(BoardDetailActivity.this);
+        uiLocker.lock();
         Intent intent = getIntent();
         int boardIndex = intent.getIntExtra("boardIndex", -1);
         new ConnectServer().getBoard(boardIndex);
@@ -80,18 +84,19 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
         public void getBoard(final int boardIndex) {
             Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
             ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-            Call<BoardData> call = serverAPI.getBoard(boardIndex);
-
-            call.enqueue(new Callback<BoardData>() {
+            Call<BoardDetailData> call = serverAPI.getBoard(boardIndex);
+            call.enqueue(new Callback<BoardDetailData>() {
                 @Override
-                public void onResponse(Call<BoardData> call, Response<BoardData> response) {
+                public void onResponse(Call<BoardDetailData> call, Response<BoardDetailData> response) {
+                    Log.d("aaaa", call.request().url().toString());
                     try {
                         if (response.isSuccessful()) {
-                            boardData = response.body();
+                            boardData = response.body().getBoardData();
 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    uiLocker.unlock();
                                     txtTitle.setText(boardData.getTitle());
                                     txtNickName.setText(boardData.getNickName());
                                     txtCreateDate.setText(boardData.getCreateDate());
@@ -101,7 +106,15 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                                 }
                             });
                         } else {
-                            Toast.makeText(BoardDetailActivity.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    uiLocker.unlock();
+                                    Toast.makeText(BoardDetailActivity.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                    Log.d("error",boardData.getMessage());
+                                }
+                            });
+
                         }
                     } catch (Exception e) {
                         Log.d("error", "Gson Converter Error is " + e.toString());
@@ -109,7 +122,7 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                 }
 
                 @Override
-                public void onFailure(Call<BoardData> call, Throwable t) {
+                public void onFailure(Call<BoardDetailData> call, Throwable t) {
 
                 }
             });
@@ -131,8 +144,8 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                                 @Override
                                 public void run() {
                                     txtCommentCount.setText(arrayListOfCommentData.size());
-                                    imgComment.setOnTouchListener(onTouchListener);
-                                    imgLike.setOnTouchListener(onTouchListener);
+                                    imgComment.setOnClickListener(onClickListener);
+                                    imgLike.setOnClickListener(onClickListener);
                                     uiLocker.unlock();
                                 }
                             });
@@ -152,9 +165,9 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
         }
     }
 
-    View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+    View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
+        public void onClick(View view) {
             switch (view.getId()){
                 case R.id.imgComment:
                     Intent intent = new Intent(BoardDetailActivity.this, CommentActivity.class);
@@ -165,7 +178,6 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                 case R.id.imgLike:
                     break;
             }
-            return false;
         }
     };
 }

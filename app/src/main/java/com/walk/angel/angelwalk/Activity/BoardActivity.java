@@ -84,7 +84,7 @@ public class BoardActivity extends AppCompatActivity implements ServerURL {
                 @Override
                 public void onResponse(Call<BoardList> call, Response<BoardList> response) {
                     try {
-                        if (response.isSuccessful() && "Success".equals(response.body().getResult())) {
+                        if (response.isSuccessful()) {
                             arrayListOfBoardData = response.body().getArrayListOfBoardData();
                             linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
@@ -123,6 +123,7 @@ public class BoardActivity extends AppCompatActivity implements ServerURL {
         }
 
         private void reload(int page){
+            page = (page-1)*10 + 1;
             Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
             ServerAPI serverAPI = retrofit.create(ServerAPI.class);
             Call<BoardList> call = serverAPI.getBoardList(page);
@@ -168,6 +169,7 @@ public class BoardActivity extends AppCompatActivity implements ServerURL {
                 int currentPosition = rv.getChildAdapterPosition(chileView);
                 Intent intent = new Intent(getApplicationContext(), BoardDetailActivity.class);
                 intent.putExtra("boardIndex", arrayListOfBoardData.get(currentPosition).getBoardIndex());
+                Log.d("aaaa", "boardIndex is " +  arrayListOfBoardData.get(currentPosition).getBoardIndex());
                 startActivity(intent);
                 return true;
             }

@@ -21,7 +21,7 @@ public class CookieInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
         if(sharedPreferences.contains("token")){
             request = request.newBuilder().addHeader("token", sharedPreferences.getString("token", "")).build();
         }else{

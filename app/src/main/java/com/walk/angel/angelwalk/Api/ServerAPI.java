@@ -4,6 +4,7 @@ import com.walk.angel.angelwalk.Data.CommonData;
 import com.walk.angel.angelwalk.Data.LoginData;
 import com.walk.angel.angelwalk.Data.SignupData;
 import com.walk.angel.angelwalk.Data.board.BoardData;
+import com.walk.angel.angelwalk.Data.board.BoardDetailData;
 import com.walk.angel.angelwalk.Data.board.BoardList;
 import com.walk.angel.angelwalk.Data.SignupData;
 import com.walk.angel.angelwalk.Data.board.CommentList;
@@ -30,15 +31,15 @@ public interface ServerAPI {
                                     @Field("password") String userPassword,
                                     @Field("passwordCheck") String userPasswordCheck);
 
-    @GET("board/{boardSeq}")
-    Call<BoardList> getBoardList(@Path("boardSeq") int pageNumber);
+    @GET("board")
+    Call<BoardList> getBoardList(@Query("startIndex") int pageNumber);
 
     @FormUrlEncoded
     @POST("board/create")
     Call<CommonData> createBoard(@Field("title") String title, @Field("content") String content);
 
     @GET("board/read/{boardSeq}")
-    Call<BoardData> getBoard(@Path("boardSeq") int boardIndex);
+    Call<BoardDetailData> getBoard(@Path("boardSeq") int boardIndex);
 
     @FormUrlEncoded
     @POST("board/update/{boardSeq}")
