@@ -1,6 +1,7 @@
 package com.walk.angel.angelwalk.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -12,78 +13,81 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Data.SightsData;
+import com.walk.angel.angelwalk.Data.board.BoardData;
 import com.walk.angel.angelwalk.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SightsAdapter extends ListAdapter<SightsData, SightsAdapter.ViewHolder> {
-    private List<SightsData> mSights = new ArrayList<>();
+public class SightsAdapter extends RecyclerView.Adapter<SightViewHolder>{
+    private ArrayList<SightsData> arrayListOfSightData = new ArrayList<>();
 
-    public static final DiffUtil.ItemCallback<SightsData> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<SightsData>() {
-                @Override
-                public boolean areItemsTheSame(SightsData oldItem, SightsData newItem) {
-                    return oldItem.getId() == newItem.getId();
-                }
-
-                @Override
-                public boolean areContentsTheSame(SightsData oldItem, SightsData newItem) {
-                    return (oldItem.getName().equals(newItem.getName()) && oldItem.getAddress().equals(newItem.getAddress()));
-                }
-            };
-
-    public SightsAdapter() {
-        super(DIFF_CALLBACK);
+    public SightsAdapter(ArrayList<SightsData> arrayListOfSightData){
+        this.arrayListOfSightData = arrayListOfSightData;
     }
 
-    public void addMoreSights(List<SightsData> newSights) {
-        mSights.addAll(newSights);
-        submitList(mSights); // DiffUtil takes care of the chekc
-    }
-
+    @NonNull
     @Override
-    public SightsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+    public com.walk.angel.angelwalk.Adapter.SightViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext() ;
 
-        View sightsView = inflater.inflate(R.layout.data_sights, parent, false);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        SightsAdapter.ViewHolder viewHolder = new SightsAdapter.ViewHolder(sightsView);
+        View sightView = layoutInflater.inflate(R.layout.data_sights, parent, false);
+
+        com.walk.angel.angelwalk.Adapter.SightViewHolder viewHolder = new com.walk.angel.angelwalk.Adapter.SightViewHolder(sightView);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(SightsAdapter.ViewHolder viewHolder, int position) {
-        SightsData sight = getItem(position);
+    public void onBindViewHolder(@NonNull com.walk.angel.angelwalk.Adapter.SightViewHolder holder, int position) {
+        SightsData sightData = arrayListOfSightData.get(position);
 
-        TextView textViewName = viewHolder.nameTextView;
-        textViewName.setText(sight.getName());
+        TextView txtName = holder.txtName;
+        txtName.setText(sightData.getName());
 
-        TextView textViewAddress = viewHolder.addressTextView;
-        textViewAddress.setText(sight.getAddress());
+        TextView txtAddress = holder.txtAddress;
+        txtAddress.setText(sightData.getAddress());
 
 
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView nameTextView;
-        public TextView addressTextView;
-
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-            super(itemView);
-
-            nameTextView = (TextView) itemView.findViewById(R.id.txtSightName);
-            addressTextView = (TextView) itemView.findViewById(R.id.txtSightAddress);
-        }
+    @Override
+    public int getItemCount() {
+        return arrayListOfSightData.size();
     }
+
+//    public static class ViewHolder extends RecyclerView.ViewHolder {
+//
+//        public TextView nameTextView;
+//        public TextView addressTextView;
+//
+//        public ViewHolder(View itemView) {
+//            // Stores the itemView in a public final member variable that can be used
+//            // to access the context from any ViewHolder instance.
+//            super(itemView);
+//
+//            nameTextView = (TextView) itemView.findViewById(R.id.txtSightName);
+//            addressTextView = (TextView) itemView.findViewById(R.id.txtSightAddress);
+//        }
+//    }
 
     public void updateList(List<SightsData> list){
-        mSights.clear();
-        mSights.addAll(list);
+        arrayListOfSightData.clear();
+        arrayListOfSightData.addAll(list);
         this.notifyDataSetChanged();
     }
 }
+
+class SightViewHolder extends RecyclerView.ViewHolder{
+    public TextView txtName;
+    public TextView txtAddress;
+
+    public SightViewHolder(View itemView) {
+        super(itemView);
+        txtName = (TextView) itemView.findViewById(R.id.txtSightName);
+        txtAddress = (TextView) itemView.findViewById(R.id.txtSightAddress);
+    }
+}
+

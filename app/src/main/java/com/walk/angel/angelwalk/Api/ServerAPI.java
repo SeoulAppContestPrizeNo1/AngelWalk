@@ -2,6 +2,7 @@ package com.walk.angel.angelwalk.Api;
 
 import com.walk.angel.angelwalk.Data.CommonData;
 import com.walk.angel.angelwalk.Data.LoginData;
+import com.walk.angel.angelwalk.Data.SightList;
 import com.walk.angel.angelwalk.Data.SignupData;
 import com.walk.angel.angelwalk.Data.board.BoardData;
 import com.walk.angel.angelwalk.Data.board.BoardDetailData;
@@ -32,6 +33,8 @@ public interface ServerAPI {
                                     @Field("password") String userPassword,
                                     @Field("passwordCheck") String userPasswordCheck);
 
+    ////////////////////////////////////////////////////
+    // 게시판
     @GET("board")
     Call<BoardList> getBoardList(@Query("startIndex") int pageNumber);
 
@@ -64,6 +67,12 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST("comment/delete/{commentSeq}")
     Call<CommonData> deleteComment(@Path("commentSeq") String commentIndex);
+
+
+    ////////////////////////////////////////////////////
+    // 관광지
+    @GET("sight")
+    Call<SightList> getSightList();
 
     @POST("like/{boardSeq}")
     Call<LikeData> updateLike(@Path("boardSeq") int boardIndex);

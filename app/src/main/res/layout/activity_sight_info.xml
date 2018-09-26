@@ -14,7 +14,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@drawable/sight_background"
+            android:background="@drawable/menu_sights"
             android:orientation="vertical"
             android:scaleType="fitXY"
             android:layout_marginBottom="7dp">
