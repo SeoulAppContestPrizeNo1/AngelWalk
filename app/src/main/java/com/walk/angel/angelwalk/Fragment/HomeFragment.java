@@ -2,22 +2,14 @@ package com.walk.angel.angelwalk.Fragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.walk.angel.angelwalk.Activity.BoardActivity;
-import com.walk.angel.angelwalk.Activity.MainActivity;
-import com.walk.angel.angelwalk.Activity.PostActivity;
 import com.walk.angel.angelwalk.Activity.SightsActivity;
 import com.walk.angel.angelwalk.Activity.WheelchairChargingActivity;
 import com.walk.angel.angelwalk.R;
