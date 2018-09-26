@@ -1,5 +1,7 @@
 package com.walk.angel.angelwalk.Data.board;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ public class CommentList {
     @SerializedName("msg")
     private String message;
 
+    @Nullable
     @SerializedName("data")
     private ArrayList<CommentData> arrayListOfCommentData = new ArrayList<>();
 

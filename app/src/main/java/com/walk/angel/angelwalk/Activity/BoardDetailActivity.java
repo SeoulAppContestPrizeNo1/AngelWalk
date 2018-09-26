@@ -63,6 +63,8 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
     @BindView(R.id.imgLike)
     ImageView imgLike;
 
+    private int boardIndex;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
         uiLocker = new UILocker(BoardDetailActivity.this);
         uiLocker.lock();
         Intent intent = getIntent();
-        int boardIndex = intent.getIntExtra("boardIndex", -1);
+        boardIndex = intent.getIntExtra("boardIndex", -1);
         new ConnectServer().getBoard(boardIndex);
 
     }
@@ -101,10 +103,12 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                                     txtNickName.setText(boardData.getNickName());
                                     txtCreateDate.setText(boardData.getCreateDate());
                                     txtContent.setText(boardData.getContent());
-                                    txtLikeCount.setText(boardData.getLikeCount());
-                                    new ConnectServer().getComment(boardIndex);
+                                    txtLikeCount.setText(String.valueOf(boardData.getLikeCount()));
+
                                 }
                             });
+
+                            getComment(boardIndex);
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -118,6 +122,7 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                         }
                     } catch (Exception e) {
                         Log.d("error", "Gson Converter Error is " + e.toString());
+                        Log.d("error", "댓글 부르기전에 에러...ㅠㅠ");
                     }
                 }
 
@@ -131,11 +136,12 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
         public void getComment(int boardIndex){
             Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
             ServerAPI serverAPI = retrofit.create(ServerAPI.class);
-            Call<CommentList> call = serverAPI.getComment(boardIndex);
+            Call<CommentList> call = serverAPI.getComment(boardIndex, 0);
 
             call.enqueue(new Callback<CommentList>() {
                 @Override
                 public void onResponse(Call<CommentList> call, Response<CommentList> response) {
+                    Log.d("aaaa", call.request().url().toString());
                     try {
                         if (response.isSuccessful()) {
                             arrayListOfCommentData = response.body().getArrayListOfCommentData();
@@ -143,9 +149,9 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    txtCommentCount.setText(arrayListOfCommentData.size());
-                                    imgComment.setOnClickListener(onClickListener);
-                                    imgLike.setOnClickListener(onClickListener);
+                                    txtCommentCount.setText(String.valueOf(arrayListOfCommentData.size()));
+                                    imgComment.setOnTouchListener(onTouchListener);
+                                    imgLike.setOnTouchListener(onTouchListener);
                                     uiLocker.unlock();
                                 }
                             });
@@ -165,19 +171,20 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
         }
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
+    View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
-        public void onClick(View view) {
+        public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (view.getId()){
                 case R.id.imgComment:
-                    Intent intent = new Intent(BoardDetailActivity.this, CommentActivity.class);
-                    intent.putExtra("arrayListOfCommentDate", arrayListOfCommentData);
-                    startActivity(intent);
-                    break;
-
-                case R.id.imgLike:
+                    if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        Intent intent = new Intent(BoardDetailActivity.this, CommentActivity.class);
+                        intent.putExtra("boardIndex", boardIndex);
+                        intent.putExtra("arrayListOfCommentData", arrayListOfCommentData);
+                        startActivity(intent);
+                    }
                     break;
             }
+            return true;
         }
     };
 }

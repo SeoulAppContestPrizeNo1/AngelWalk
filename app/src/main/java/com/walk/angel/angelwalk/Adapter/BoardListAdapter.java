@@ -14,7 +14,7 @@ import com.walk.angel.angelwalk.R;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class BoardListAdapter extends RecyclerView.Adapter<ViewHolder>{
+public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.ViewHolder>{
 
     private ArrayList<BoardData> arrayListOfBoardData = new ArrayList<>();
 
@@ -53,15 +53,17 @@ public class BoardListAdapter extends RecyclerView.Adapter<ViewHolder>{
     public int getItemCount() {
         return arrayListOfBoardData.size();
     }
-}
 
-class ViewHolder extends RecyclerView.ViewHolder{
-    public TextView txtTitle;
-    public TextView txtContent;
+    class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView txtTitle;
+        public TextView txtContent;
 
-    public ViewHolder(View itemView) {
-        super(itemView);
-        txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
-        txtContent = (TextView) itemView.findViewById(R.id.txtContent);
+        public ViewHolder(View itemView) {
+            super(itemView);
+            txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
+            txtContent = (TextView) itemView.findViewById(R.id.txtContent);
+        }
     }
 }
+
+

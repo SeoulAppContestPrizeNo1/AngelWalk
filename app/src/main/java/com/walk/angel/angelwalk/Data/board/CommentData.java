@@ -1,19 +1,25 @@
 package com.walk.angel.angelwalk.Data.board;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class CommentData implements Serializable {
+    @Nullable
     @SerializedName("seq")
     private int commentIndex;
 
+    @Nullable
     @SerializedName("content")
     private String content;
 
+    @Nullable
     @SerializedName("date")
     private String createDate;
 
+    @Nullable
     @SerializedName("nickName")
     private String nickName;
 

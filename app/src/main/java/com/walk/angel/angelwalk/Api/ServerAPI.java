@@ -50,12 +50,11 @@ public interface ServerAPI {
     Call<CommonData> deleteBoard(@Path("boardSeq") int boardIndex);
 
     @GET("comment/{boardSeq}")
-    Call<CommentList> getComment(@Path("boardSeq") int boardIndex);
-
+    Call<CommentList> getComment(@Path("boardSeq") int boardIndex, @Query("startIndex") int pageNumber);
 
     @FormUrlEncoded
     @POST("comment/create/{boardSeq}")
-    Call<CommonData> createComment(@Field("content") String content);
+    Call<CommonData> createComment(@Path("boardSeq") int boardIndex, @Field("content") String content);
 
     @FormUrlEncoded
     @POST("comment/update/{commentSeq}")
@@ -68,15 +67,6 @@ public interface ServerAPI {
     @FormUrlEncoded
     @POST("like/{boardSeq}")
     Call<CommonData> updateLike(@Path("boardSeq") int boardIndex);
-
-
-
-
-
-
-
-
-
 
     @FormUrlEncoded
     @POST("user/update/nick-name")
