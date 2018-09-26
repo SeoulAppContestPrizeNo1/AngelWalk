@@ -3,6 +3,7 @@ package com.walk.angel.angelwalk.Fragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.walk.angel.angelwalk.DaumMapSchemeURL;
 import com.walk.angel.angelwalk.R;
@@ -25,6 +25,8 @@ import com.walk.angel.angelwalk.R;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MapFragment extends Fragment {
 
@@ -136,6 +138,15 @@ public class MapFragment extends Fragment {
             //Network 위치제공자에 의한 위치변화
             //Network 위치는 Gps에 비해 정확도가 많이 떨어진다.
 
+            SharedPreferences pref = getActivity().getSharedPreferences("currentPosition", MODE_PRIVATE);
+            if (pref != null) {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putLong("currentLongitude", Double.doubleToRawLongBits(currentLongitude));
+                editor.putLong("currentLatitude", Double.doubleToRawLongBits(currentLatitude));
+                editor.commit();
+            }
+
+
             MapPOIItem marker = new MapPOIItem();
             marker.setItemName("현재위치");
             marker.setTag(0);
@@ -143,6 +154,7 @@ public class MapFragment extends Fragment {
             marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
             marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
+            mapView.removePOIItem(marker);
             mapView.addPOIItem(marker);
 
             //mapView.setShowCurrentLocationMarker(true); // 현위치 표시
