@@ -66,7 +66,7 @@ public class BoardActivity extends AppCompatActivity implements ServerURL {
                 return true;
             }
         });
-        new ConnectServer().run(1);
+        new ConnectServer().run(0);
 
 
     }
@@ -123,7 +123,7 @@ public class BoardActivity extends AppCompatActivity implements ServerURL {
         }
 
         private void reload(int page){
-            page = (page-1)*10 + 1;
+            page = (page-1)*10;
             Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
             ServerAPI serverAPI = retrofit.create(ServerAPI.class);
             Call<BoardList> call = serverAPI.getBoardList(page);

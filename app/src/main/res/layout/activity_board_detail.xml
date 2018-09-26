@@ -81,31 +81,35 @@
             android:id="@+id/imgComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/txtCommentCount"
             android:src="@drawable/oval_2_oval_2_copy_oval_2_copy_2_rectangle_14" />
 
         <TextView
             android:id="@+id/txtCommentCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imgComment"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
             android:textSize="13.3sp"
             android:textColor="#424242"/>
 
-        <TextView
-            android:id="@+id/txtLikeCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"/>
 
         <ImageView
             android:id="@+id/imgLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/txtLikeCount"
-            android:layout_marginRight="6.7dp"
-            android:src="@drawable/heart"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="6.7dp"
+            android:src="@drawable/like_status_selector"/>
+
+        <TextView
+            android:id="@+id/txtLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgLike"
+            android:layout_marginLeft="10dp"
+            android:textSize="13.3sp"
+            android:textColor="#424242"/>
 
 
     </RelativeLayout>

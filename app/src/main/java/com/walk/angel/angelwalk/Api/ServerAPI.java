@@ -8,6 +8,7 @@ import com.walk.angel.angelwalk.Data.board.BoardDetailData;
 import com.walk.angel.angelwalk.Data.board.BoardList;
 import com.walk.angel.angelwalk.Data.SignupData;
 import com.walk.angel.angelwalk.Data.board.CommentList;
+import com.walk.angel.angelwalk.Data.board.LikeData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -64,9 +65,8 @@ public interface ServerAPI {
     @POST("comment/delete/{commentSeq}")
     Call<CommonData> deleteComment(@Path("commentSeq") String commentIndex);
 
-    @FormUrlEncoded
     @POST("like/{boardSeq}")
-    Call<CommonData> updateLike(@Path("boardSeq") int boardIndex);
+    Call<LikeData> updateLike(@Path("boardSeq") int boardIndex);
 
     @FormUrlEncoded
     @POST("user/update/nick-name")

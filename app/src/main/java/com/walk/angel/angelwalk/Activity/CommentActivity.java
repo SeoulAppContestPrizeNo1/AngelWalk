@@ -143,6 +143,7 @@ public class CommentActivity extends AppCompatActivity implements ServerURL{
                                     commentListAdapter = new CommentListAdapter(arrayListOfCommentData);
                                     recyclerViewComment.setAdapter(commentListAdapter);
                                     recyclerViewComment.setLayoutManager(linearLayoutManager);
+                                    editComment.setText("");
                                     uiLocker.unlock();
                                 }
                             });
