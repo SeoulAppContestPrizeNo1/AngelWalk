@@ -91,7 +91,6 @@ public class BoardActivity extends AppCompatActivity implements ServerURL {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-
                                     boardListAdapter = new BoardListAdapter(arrayListOfBoardData);
                                     boardRecyclerView.setAdapter(boardListAdapter);
                                     boardRecyclerView.setLayoutManager(linearLayoutManager);

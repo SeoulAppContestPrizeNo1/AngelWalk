@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
         ViewGroup HomeFragment = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
         mainImage = (ImageView) HomeFragment.findViewById(R.id.mainImage);
-        btnCard = (Button) HomeFragment.findViewById(R.id.btnCard);
+        //btnCard = (Button) HomeFragment.findViewById(R.id.btnCard);
 
         btnTourism = (Button) HomeFragment.findViewById(R.id.btnTourism);
         btnTourism.setOnClickListener(btnClickListener);

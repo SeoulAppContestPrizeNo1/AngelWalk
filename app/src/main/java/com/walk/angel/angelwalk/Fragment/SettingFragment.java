@@ -3,6 +3,8 @@ package com.walk.angel.angelwalk.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +53,7 @@ public class SettingFragment extends Fragment {
     private String token;
     private String userId;
     private String userPassword;
+    private String userNickName;
 
     private SharedPreferences pref;
     private LinearLayout layoutSetting;
@@ -59,34 +62,42 @@ public class SettingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup SettingFragment = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
+        ViewGroup settingFragment = (ViewGroup) inflater.inflate(R.layout.fragment_setting, container, false);
 
-        pref = getActivity().getSharedPreferences("login", MODE_PRIVATE);
+
+
+        return settingFragment;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View settingFragment, @Nullable Bundle savedInstanceState) {
+        pref = settingFragment.getContext().getSharedPreferences("login", MODE_PRIVATE);
         token = pref.getString("token", "");
         userId = pref.getString("id", "");
         userPassword = pref.getString("password", "");
+        userNickName = pref.getString("nickName","");
 
-        txtUserId = (TextView) SettingFragment.findViewById(R.id.textId);
+        txtUserId = (TextView) settingFragment.findViewById(R.id.textId);
         txtUserId.setText(userId+" ");
 
-        editNickname = (EditText) SettingFragment.findViewById(R.id.editNickName);
-        editPassword = (EditText) SettingFragment.findViewById(R.id.editPassword);
+        editNickname = (EditText) settingFragment.findViewById(R.id.editNickName);
+        editNickname.setText(userNickName);
+
+        editPassword = (EditText) settingFragment.findViewById(R.id.editPassword);
         editPassword.setText(userPassword);
 
-        btnNicknameChange = (Button) SettingFragment.findViewById(R.id.btnChangeNickname);
-        btnPasswordChange = (Button) SettingFragment.findViewById(R.id.btnChangePassword);
-        btnLogout = (Button) SettingFragment.findViewById(R.id.btnLogout);
+        btnNicknameChange = (Button) settingFragment.findViewById(R.id.btnChangeNickname);
+        btnPasswordChange = (Button) settingFragment.findViewById(R.id.btnChangePassword);
+        btnLogout = (Button) settingFragment.findViewById(R.id.btnLogout);
 
         btnNicknameChange.setOnClickListener(btnClickListener);
         btnPasswordChange.setOnClickListener(btnClickListener);
         btnLogout.setOnClickListener(btnClickListener);
 
-        layoutSetting = (LinearLayout) SettingFragment.findViewById(R.id.layoutSetting);
+        layoutSetting = (LinearLayout) settingFragment.findViewById(R.id.layoutSetting);
 
         touchBackground = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         layoutSetting.setOnClickListener(backClickListener);
-
-        return SettingFragment;
     }
 
     private Button.OnClickListener btnClickListener = new View.OnClickListener() {
@@ -131,7 +142,7 @@ public class SettingFragment extends Fragment {
         }
     };
 
-    public void connectServerForNickname(String userNickname){
+    public void connectServerForNickname(final String userNickname){
         CookieInterceptor cookieInterceptor = new CookieInterceptor(getActivity().getApplicationContext());
         OkHttpClient client = new OkHttpClient.Builder().addNetworkInterceptor(cookieInterceptor).build();
 
@@ -150,9 +161,10 @@ public class SettingFragment extends Fragment {
                         String result = commonData.getResult();
 
                         if("Success".equals(result)){
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("nickName", userNickname);
                             Toast.makeText(getView().getContext(), "닉네임이 변경되었습니다.", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getView().getContext(), commonData.getMessage(), Toast.LENGTH_SHORT).show();
+
                         }
 
                     }else{

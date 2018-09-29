@@ -1,26 +1,40 @@
 package com.walk.angel.angelwalk.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SightsData implements Serializable {
 
     private int mId;
-
+    private double mLatitude, mLongitude;
     private String mName;
     private String mAddress;
-    private String mCategory;
+    private String mUrl;
+    private String mImage;
 
-    public SightsData(int id, String name, String address, String category) {
+    public SightsData(int id,
+                      double latitude,
+                      double longitude,
+                      String name, String address,
+                      String url, String image) {
         mId = id;
+        mLatitude = latitude;
+        mLongitude = longitude;
         mName = name;
         mAddress = address;
-        mCategory = category;
+        mUrl = url;
+        mImage = image;
     }
 
     public int getId() {
         return mId;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
     }
 
     public String getName() {
@@ -31,20 +45,12 @@ public class SightsData implements Serializable {
         return mAddress;
     }
 
-    public String getCategory() {
-        return mCategory;
+    public String getURL() {
+        return mUrl;
     }
 
-    private static int lastContactId = 0;
-
-    public static List<SightsData> createSightsList(int numContacts) {
-        List<SightsData> sights = new ArrayList<>();
-
-        for (int i = 1; i <= numContacts; i++) {
-            sights.add(new SightsData(i,"관광지 " + i, "주소 " + i, "고궁"));
-        }
-
-        sights.add(new SightsData(numContacts++,"아름", "테스트","공원"));
-        return sights;
+    public String getImage() {
+        return mImage;
     }
+
 }

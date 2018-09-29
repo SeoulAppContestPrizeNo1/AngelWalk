@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.walk.angel.angelwalk.Data.SightsData;
 import com.walk.angel.angelwalk.Data.board.BoardData;
 import com.walk.angel.angelwalk.R;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SightsAdapter extends RecyclerView.Adapter<SightViewHolder>{
+    private Context context;
     private ArrayList<SightsData> arrayListOfSightData = new ArrayList<>();
 
     public SightsAdapter(ArrayList<SightsData> arrayListOfSightData){
@@ -29,7 +32,7 @@ public class SightsAdapter extends RecyclerView.Adapter<SightViewHolder>{
     @NonNull
     @Override
     public com.walk.angel.angelwalk.Adapter.SightViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext() ;
+        context = parent.getContext() ;
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
@@ -50,6 +53,8 @@ public class SightsAdapter extends RecyclerView.Adapter<SightViewHolder>{
         TextView txtAddress = holder.txtAddress;
         txtAddress.setText(sightData.getAddress());
 
+        ImageView sightImageView = holder.sightImageView;
+        Glide.with(context).load(sightData.getImage()).into(sightImageView);
 
     }
 
@@ -58,36 +63,19 @@ public class SightsAdapter extends RecyclerView.Adapter<SightViewHolder>{
         return arrayListOfSightData.size();
     }
 
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        public TextView nameTextView;
-//        public TextView addressTextView;
-//
-//        public ViewHolder(View itemView) {
-//            // Stores the itemView in a public final member variable that can be used
-//            // to access the context from any ViewHolder instance.
-//            super(itemView);
-//
-//            nameTextView = (TextView) itemView.findViewById(R.id.txtSightName);
-//            addressTextView = (TextView) itemView.findViewById(R.id.txtSightAddress);
-//        }
-//    }
 
-    public void updateList(List<SightsData> list){
-        arrayListOfSightData.clear();
-        arrayListOfSightData.addAll(list);
-        this.notifyDataSetChanged();
-    }
 }
 
 class SightViewHolder extends RecyclerView.ViewHolder{
     public TextView txtName;
     public TextView txtAddress;
+    public ImageView sightImageView;
 
     public SightViewHolder(View itemView) {
         super(itemView);
         txtName = (TextView) itemView.findViewById(R.id.txtSightName);
         txtAddress = (TextView) itemView.findViewById(R.id.txtSightAddress);
+        sightImageView = (ImageView) itemView.findViewById(R.id.imageView_sight);
     }
 }
 

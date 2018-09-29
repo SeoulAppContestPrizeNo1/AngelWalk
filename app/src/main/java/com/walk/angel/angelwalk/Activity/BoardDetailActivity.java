@@ -105,12 +105,20 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                                     txtCreateDate.setText(boardData.getCreateDate().substring(0, 10)+ " / " +boardData.getCreateDate().substring(11, 16));
                                     txtContent.setText(boardData.getContent());
                                     txtLikeCount.setText(String.valueOf(boardData.getLikeCount()));
+                                    switch (boardData.getLikeStatus()){
+                                        case 0:
+                                            imgLike.setSelected(false);
+                                            break;
+                                        case 1:
+                                            imgLike.setSelected(true);
+                                            break;
+                                    }
+
 
                                 }
                             });
 
                             getComment(boardIndex);
-                            setLike(boardIndex);
                         } else {
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -158,10 +166,18 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                                 }
                             });
                         } else {
-                            Toast.makeText(BoardDetailActivity.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    uiLocker.unlock();
+                                    Toast.makeText(BoardDetailActivity.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         }
                     } catch (Exception e) {
                         Log.d("error", "Gson Converter Error is " + e.toString());
+                        uiLocker.unlock();
                     }
                 }
 
@@ -207,12 +223,14 @@ public class BoardDetailActivity extends AppCompatActivity implements ServerURL 
                         }
                     } catch (Exception e) {
                         Log.d("error", "Gson Converter Error is " + e.toString());
+                        uiLocker.unlock();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LikeData> call, Throwable t) {
-
+                    Log.d("error" , "Like Update Server Error is " + t.toString());
+                    uiLocker.unlock();
                 }
             });
         }

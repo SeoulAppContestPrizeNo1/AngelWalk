@@ -2,8 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:background="#58595b">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="#ffffff"
+        android:layout_marginBottom="1dp">
 
     <TextView
         android:id="@+id/txtNickName"
@@ -29,6 +36,8 @@
         android:layout_marginTop="5dp"
         android:textSize="12sp"
         android:textColor="#424242"/>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

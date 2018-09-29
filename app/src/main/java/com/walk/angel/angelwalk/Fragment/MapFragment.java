@@ -14,17 +14,25 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.walk.angel.angelwalk.Activity.WheelchairChargingActivity;
+import com.walk.angel.angelwalk.Data.SightList;
+import com.walk.angel.angelwalk.Data.SightsData;
+import com.walk.angel.angelwalk.Data.WheelChairData;
 import com.walk.angel.angelwalk.DaumMapSchemeURL;
 import com.walk.angel.angelwalk.R;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
+
+import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -36,6 +44,7 @@ public class MapFragment extends Fragment {
 
     private double currentLongitude;
     private double currentLatitude;
+    private SharedPreferences pref;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class MapFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        pref = view.getContext().getSharedPreferences("currentPosition", MODE_PRIVATE);
         requestPermission();
         createMapView();
     }
@@ -105,23 +115,45 @@ public class MapFragment extends Fragment {
         // 줌 아웃
         mapView.zoomOut(true);
 
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("서현동");
-        marker.setTag(0);
-        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(37.38,127.13));
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+        try {
+            SightList sight = new SightList();
+            sight.setArrayListOfSightData();
+            ArrayList<SightsData> arrayListOfSight  = sight.getArrayListOfSightData();
+            for(int index = 0; index < arrayListOfSight.size(); index++){
+                MapPOIItem sightMarker = new MapPOIItem();
+                sightMarker.setItemName(arrayListOfSight.get(index).getName());
+                sightMarker.setTag(0);
+                sightMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.valueOf(arrayListOfSight.get(index).getLatitude()),Double.valueOf(arrayListOfSight.get(index).getLongitude())));
+                sightMarker.setMarkerType(MapPOIItem.MarkerType.YellowPin); //
+                sightMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
-        MapPOIItem marker2 = new MapPOIItem();
-        marker2.setItemName("건국대");
-        marker2.setTag(0);
-        marker2.setMapPoint(MapPoint.mapPointWithGeoCoord(37.54,127.07));
-        marker2.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker2.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+                mapView.addPOIItem(sightMarker);
+            }
+        }catch (Exception e){
+            Log.d("error", "Create Sights Marker Error is " +e.toString());
+        }
 
-        mapView.addPOIItem(marker);
-        mapView.addPOIItem(marker2);
-        //mapView.setPOIItemEventListener();
+        try {
+            WheelChairData wheelChairData = new WheelChairData();
+            wheelChairData.setChargingLocation(getActivity().getAssets());
+            wheelChairData.setLocationInfo();
+            ArrayList<String> arrayListOfLocationName = wheelChairData.getLocationNames();
+            ArrayList<String> arrayListOfLongitude = wheelChairData.getLocationLongitudes();
+            ArrayList<String> arrayListOfLatitude = wheelChairData.getLocationLatitudes();
+
+            for(int index = 0; index < arrayListOfLocationName.size(); index++){
+                MapPOIItem wheelChairMarker = new MapPOIItem();
+                wheelChairMarker.setItemName(arrayListOfLocationName.get(index));
+                wheelChairMarker.setTag(0);
+                wheelChairMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.valueOf(arrayListOfLatitude.get(index)),Double.valueOf(arrayListOfLongitude.get(index))));
+                wheelChairMarker.setMarkerType(MapPOIItem.MarkerType.BluePin); //
+                wheelChairMarker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+                mapView.addPOIItem(wheelChairMarker);
+            }
+        }catch (Exception e){
+            Log.d("error", "Create WheelChair Marker Error is " +e.toString());
+        }
     }
 
     private final LocationListener mLocationListener = new LocationListener() {
@@ -131,33 +163,18 @@ public class MapFragment extends Fragment {
 
             currentLongitude = location.getLongitude(); //경도
             currentLatitude = location.getLatitude();   //위도
-            double altitude = location.getAltitude();   //고도
-            float accuracy = location.getAccuracy();    //정확도
-            String provider = location.getProvider();   //위치제공자
-            //Gps 위치제공자에 의한 위치변화. 오차범위가 좁다.
-            //Network 위치제공자에 의한 위치변화
-            //Network 위치는 Gps에 비해 정확도가 많이 떨어진다.
 
-            SharedPreferences pref = getActivity().getSharedPreferences("currentPosition", MODE_PRIVATE);
+            //SharedPreferences pref = getActivity().getSharedPreferences("currentPosition", MODE_PRIVATE);
             if (pref != null) {
                 SharedPreferences.Editor editor = pref.edit();
-                editor.putLong("currentLongitude", Double.doubleToRawLongBits(currentLongitude));
-                editor.putLong("currentLatitude", Double.doubleToRawLongBits(currentLatitude));
+                editor.putString("currentLongitude", String.valueOf(currentLongitude));
+                editor.putString("currentLatitude", String.valueOf(currentLatitude));
                 editor.commit();
             }
 
+            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            mapView.setShowCurrentLocationMarker(true); // 현위치 표시
 
-            MapPOIItem marker = new MapPOIItem();
-            marker.setItemName("현재위치");
-            marker.setTag(0);
-            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(currentLatitude,currentLongitude));
-            marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-            marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
-
-            mapView.removePOIItem(marker);
-            mapView.addPOIItem(marker);
-
-            //mapView.setShowCurrentLocationMarker(true); // 현위치 표시
             mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(currentLatitude, currentLongitude), true);
 
             mapView.setPOIItemEventListener(poiItemEventListener);

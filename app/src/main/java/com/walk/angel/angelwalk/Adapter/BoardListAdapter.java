@@ -43,9 +43,8 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.View
         TextView txtTitle = holder.txtTitle;
         txtTitle.setText(boardData.getTitle());
 
-        TextView txtContent = holder.txtContent;
-        txtContent.setText(boardData.getContent());
-
+        TextView txtWriterName = holder.txtWriterName;
+        txtWriterName.setText(boardData.getNickName());
 
     }
 
@@ -56,12 +55,12 @@ public class BoardListAdapter extends RecyclerView.Adapter<BoardListAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder{
         public TextView txtTitle;
-        public TextView txtContent;
+        public TextView txtWriterName;
 
         public ViewHolder(View itemView) {
             super(itemView);
             txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
-            txtContent = (TextView) itemView.findViewById(R.id.txtContent);
+            txtWriterName = (TextView) itemView.findViewById(R.id.txtWriterName);
         }
     }
 }

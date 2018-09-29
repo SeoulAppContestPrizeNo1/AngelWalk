@@ -2,6 +2,7 @@ package com.walk.angel.angelwalk.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -131,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<SignupData>() {
             @Override
-            public void onResponse(Call<SignupData> call, Response<SignupData> response) {
+            public void onResponse(Call<SignupData> call, final Response<SignupData> response) {
                 try{
 
                     Log.d("info", "response :: " + response.code());
@@ -140,18 +141,24 @@ public class RegisterActivity extends AppCompatActivity {
                         SignupData signupData = response.body();
                         String result = signupData.getResult();
 
-                        Toast.makeText(RegisterActivity.this, "response : "+response.code(), Toast.LENGTH_SHORT).show();
                         Log.d("info", "response :: " + response.code());
                         if("Success".equals(result)){
+
+                            SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("nickName", editUserNickName.getText().toString());
+                            editor.commit();
+
                             Intent intentMain = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intentMain);
+                            finish();;
                         }
 
                     }else{
                         RegisterActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(RegisterActivity.this, "아이디 혹은 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
